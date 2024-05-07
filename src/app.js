@@ -1,8 +1,12 @@
-import express, { urlencoded } from "express";
+import express from "express";
 
 import cors from "cors";
 
 import cookieParser from "cookie-parser";
+
+import bodyParser from "body-parser";
+
+import userRouter from "./routes/user.routes.js";
 
 const app = express();
 
@@ -12,10 +16,19 @@ app.use(
     credentials: true,
   })
 );
-
-app.use(express.json({ limit:  "20kb" }));
-app.use(express.urlencoded({ extended: true, limit: "20kb" }));
+app.post('/temp',(req,res)=>{
+  console.log(req.body)
+  res.json({
+    message:"Hello world"
+  })
+})
+app.use(express.json()); // for parsing application/json
+app.use(express.urlencoded({ extended: true})); // for parsing application/x-www-form-urlencoded
 app.use(express.static("public"));
 app.use(cookieParser());
+
+// routes
+app.use("/api/v1/users", userRouter);
+
 
 export { app };
