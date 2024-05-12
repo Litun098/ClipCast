@@ -16,12 +16,7 @@ app.use(
     credentials: true,
   })
 );
-app.post('/temp',(req,res)=>{
-  console.log(req.body)
-  res.json({
-    message:"Hello world"
-  })
-})
+
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true})); // for parsing application/x-www-form-urlencoded
 app.use(express.static("public"));
