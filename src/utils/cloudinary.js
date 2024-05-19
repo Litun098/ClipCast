@@ -28,4 +28,16 @@ const uploadOnCloudinary = async (localFilePath) => {
 };
 
 
+// Todo
+const deleteDuplicateFile = async()=>{
+  const response = await cloudinary.v2.api
+  .delete_resources(['cld-sample'], 
+    { type: 'upload', resource_type: 'image' })
+  .then(console.log);
+
+  // cloudinary.v2.api.delete_resources(public_ids, options).then(callback);
+  console.log(response)
+}
+
+
 export {uploadOnCloudinary}
