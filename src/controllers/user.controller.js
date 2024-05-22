@@ -218,8 +218,8 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
       await generateAccessAndRefreshToken(user._id);
     return res
       .status(200)
-      .cookie("accessToken", accessToken)
-      .cookie("refreshToken", newRefreshToken)
+      .cookie("accessToken", accessToken, options)
+      .cookie("refreshToken", newRefreshToken, options)
       .json(
         new ApiResponse(
           200,
@@ -245,7 +245,7 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
   }
 
   user.password = newPassword;
-  await User.save({ validateBeforeSave: false });
+  await user.save({ validateBeforeSave: false });
 
   return res
     .status(200)
@@ -255,28 +255,32 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
 const getCurrentUser = asyncHandler(async (req, res) => {
   return res
     .status(200)
-    .json(200, req.user, "current user fetched successfully.");
+    .json(new ApiResponse(200, req.user, "current user fetched successfully."));
 });
 
 const updateAccountDetails = asyncHandler(async (req, res) => {
   const { fullName, email } = req.body;
+  const user = await User.findById(req.user?._id).select("-password");
 
-  if (!fullName || !email) {
+  console.log(fullName, email);
+
+  if (!fullName && !email) {
     throw new ApiError(400, "All fields are required");
   }
 
-  const user = await User.findByIdAndUpdate(
-    req.user?._id,
-    {
-      $set: {
-        fullName,
-        email,
-      },
-    },
-    { new: true }
-  ).select("-password");
+  if (fullName) {
+    user.fullName = fullName;
+  }
+  if (email) {
+    user.email = email;
+  }
 
-  res.stetus(200).json(200, user, "Account details updated successfully");
+  const updatedUser = await user.save({ validateBeforeSave: false });
+  res
+    .status(200)
+    .json(
+      new ApiResponse(200, updatedUser, "Account details updated successfully")
+    );
 });
 
 const updateUserAvatar = asyncHandler(async (req, res) => {
