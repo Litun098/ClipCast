@@ -16,28 +16,26 @@ const uploadOnCloudinary = async (localFilePath) => {
     const response = await cloudinary.uploader.upload(localFilePath, {
       resource_type: "auto",
     });
-    
-    fs.unlinkSync(localFilePath)
+
+    fs.unlinkSync(localFilePath);
     return response;
-    
   } catch (error) {
-    fs.unlinkSync(localFilePath) // remove the locally saved temp file as the upload operation got failed
-    
+    fs.unlinkSync(localFilePath); // remove the locally saved temp file as the upload operation got failed
+
     return null;
   }
 };
 
-
 // Todo
-const deleteDuplicateFile = async()=>{
-  const response = await cloudinary.v2.api
-  .delete_resources(['cld-sample'], 
-    { type: 'upload', resource_type: 'image' })
-  .then(console.log);
+export const deleteImage = async (image_id) => {
+  const response = await cloudinary.api
+    .delete_resources([image_id], { type: "upload", resource_type: "image" })
+    .then(() => {
+      console.log("Image deleted from cloudinary.");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 
-  // cloudinary.v2.api.delete_resources(public_ids, options).then(callback);
-  console.log(response)
-}
-
-
-export {uploadOnCloudinary}
+export { uploadOnCloudinary };

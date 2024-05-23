@@ -4,7 +4,7 @@ import { User } from "../models/user.model.js";
 import { ApiError } from "../utils/apiErrors.js";
 import { ApiResponse } from "../utils/apiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
-import { uploadOnCloudinary } from "../utils/cloudinary.js";
+import { deleteImage, uploadOnCloudinary } from "../utils/cloudinary.js";
 
 const registerUser = asyncHandler(async (req, res) => {
   // get user details from frontend
@@ -285,16 +285,24 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
 
 const updateUserAvatar = asyncHandler(async (req, res) => {
   const avatarLocalPath = req.file?.path;
+  
+  // Get the old Image
+  const existedUserAvatar = await User.findById(req.user?.id).select("avatar") 
+  
   if (!avatarLocalPath) {
     throw new ApiError(400, "Avatar file is missing");
   }
-
+  
+  // Get public Id of Image
+  const imageIdToBeDeleted = existedUserAvatar.avatar.split("/")[7].split('.')[0];
+  
+  //upload new the file to cloudinary 
   const avatar = await uploadOnCloudinary(avatarLocalPath);
-
+  
   if (!avatar.url) {
     throw new ApiError(400, "Error while uploading on avatar.");
   }
-
+  
   const user = await User.findByIdAndUpdate(
     req.user?._id,
     {
@@ -305,12 +313,11 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
     { new: true }
   ).select("-password");
 
-  // TODO: Delete duplicate file
-  // cloudinary.v2.api
-  // .delete_resources(['cld-sample'],
-  //   { type: 'upload', resource_type: 'image' })
-  // .then(console.log);
+  
+  
+  await deleteImage(imageIdToBeDeleted)
 
+  
   return res
     .status(200)
     .json(new ApiResponse(200, user, "avatar updated successfully"));
