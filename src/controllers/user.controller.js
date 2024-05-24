@@ -285,24 +285,24 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
 
 const updateUserAvatar = asyncHandler(async (req, res) => {
   const avatarLocalPath = req.file?.path;
-  
+
   // Get the old Image
-  const existedUserAvatar = await User.findById(req.user?.id).select("avatar") 
-  
+  const existUserAvatar = await User.findById(req.user?.id).select("avatar");
+
   if (!avatarLocalPath) {
     throw new ApiError(400, "Avatar file is missing");
   }
-  
+
   // Get public Id of Image
-  const imageIdToBeDeleted = existedUserAvatar.avatar.split("/")[7].split('.')[0];
-  
-  //upload new the file to cloudinary 
+  const imageIdToBeDeleted = existUserAvatar.avatar.split("/")[7].split(".")[0];
+
+  //upload new the file to cloudinary
   const avatar = await uploadOnCloudinary(avatarLocalPath);
-  
+
   if (!avatar.url) {
     throw new ApiError(400, "Error while uploading on avatar.");
   }
-  
+
   const user = await User.findByIdAndUpdate(
     req.user?._id,
     {
@@ -313,11 +313,8 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
     { new: true }
   ).select("-password");
 
-  
-  
-  await deleteImage(imageIdToBeDeleted)
+  await deleteImage(imageIdToBeDeleted);
 
-  
   return res
     .status(200)
     .json(new ApiResponse(200, user, "avatar updated successfully"));
@@ -325,6 +322,13 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
 
 const updateUserCoverImage = asyncHandler(async (req, res) => {
   const coverImageLocalPath = req.file?.path;
+
+  // Get the old Image
+  const existUserCoverImage = await User.findById(req.user?.id).select("coverImage");
+  
+  // Get public Id of Image
+  const imageIdToBeDeleted = existUserCoverImage.coverImage.split("/")[7].split(".")[0];
+
   if (!coverImageLocalPath) {
     throw new ApiError(400, "Avatar file is missing");
   }
@@ -344,6 +348,8 @@ const updateUserCoverImage = asyncHandler(async (req, res) => {
     },
     { new: true }
   ).select("-password");
+  
+  await deleteImage(imageIdToBeDeleted);
 
   return res
     .status(200)
