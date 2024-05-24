@@ -1,5 +1,7 @@
 import jwt from "jsonwebtoken";
 
+import mongoose from "mongoose";
+
 import { User } from "../models/user.model.js";
 import { ApiError } from "../utils/apiErrors.js";
 import { ApiResponse } from "../utils/apiResponse.js";
@@ -458,20 +460,20 @@ const getWatchHistory = asyncHandler(async (req, res) => {
             },
           },
           {
-            pipeline: [
-              {
-                $addFields: {
-                  owner: {
-                    $first: "$owner",
-                  },
-                },
+            $addFields: {
+              owner: {
+                $arrayElemAt: ["$owner", 0],
               },
-            ],
+            },
           },
         ],
       },
     },
   ]);
+
+  if (user.length === 0) {
+    return res.status(404).json(new ApiResponse(404, null, "User not found"));
+  }
 
   return res
     .status(200)
@@ -483,6 +485,7 @@ const getWatchHistory = asyncHandler(async (req, res) => {
       )
     );
 });
+
 
 export {
   registerUser,
