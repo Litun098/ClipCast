@@ -55,8 +55,7 @@ userSchema.pre("save", function (next) {
   if (!this.isModified("password")) return next();
 
   try {
-    const saltRounds = 10;
-    this.password = bcrypt.hashSync(this.password, saltRounds);
+    this.password = bcrypt.hashSync(this.password, 10);
     next();
   } catch (error) {
     next(error);
