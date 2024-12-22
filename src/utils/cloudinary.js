@@ -26,7 +26,7 @@ const uploadOnCloudinary = async (localFilePath) => {
   }
 };
 
-// Todo
+// Delete old file from cloudinary
 export const deleteImage = async (image_id) => {
   const response = await cloudinary.api
     .delete_resources([image_id], { type: "upload", resource_type: "image" })

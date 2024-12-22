@@ -42,7 +42,7 @@ router.route("/login").post(login);
 
 //secured routes
 router.route("/logout").post(verifyJwt, logOutUser);
-router.route("/refresh-token").post(verifyJwt,refreshAccessToken); //check 
+router.route("/refresh-token").post(verifyJwt, refreshAccessToken); //check
 router.route("/change-password").post(verifyJwt, changeCurrentPassword);
 router.route("/current-user").get(verifyJwt, getCurrentUser);
 router.route("/update-account").patch(verifyJwt, updateAccountDetails);
