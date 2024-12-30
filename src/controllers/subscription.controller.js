@@ -60,6 +60,15 @@ const getSubscribedChannels = asyncHandler(async (req, res) => {
 // controller to return channel list to which user has subscribed
 const getUserChannelSubscribers = asyncHandler(async (req, res) => {
   const { subscriberId } = req.params;
+
+  const channels = await Subscription.find({subscriber:subscriberId}).populate({path:"channel", select:"username avatar"});
+
+  console.log(channels);
+  if(!channels){    
+    return res.status(400).json(new ApiRespons(400,"No subscriptions yet."));
+  }
+
+  return res.status(200).json(new ApiResponse(200,channels));
 });
 
 export { toggleSubscription, getUserChannelSubscribers, getSubscribedChannels };
