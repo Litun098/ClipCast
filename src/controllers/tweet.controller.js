@@ -23,17 +23,16 @@ const getUserTweets = asyncHandler(async (req, res) => {
   // TODO: get user tweets
   const { userId } = req.params;
 
-  console.log(userId);
   if (!isValidObjectId(userId)) {
     throw new ApiError(400, "Invalid user id.");
   }
 
-  const tweets = await Tweet.find({
-    owner: userId,
-  }).populate({
-    path: "owner",
-    select: "username avatar",
-  });
+  const tweets = await Tweet.find({ owner: userId }, { createdAt: 1 })
+    .populate({
+      path: "owner",
+      select: "username avatar",
+    })
+    .select("_id content createdAt owner");
 
   if (tweets.length == 0) {
     return res.status(404).json(new ApiResponse(404, "No tweet found."));
@@ -52,7 +51,8 @@ const updateTweet = asyncHandler(async (req, res) => {
 
   const tweet = await Tweet.findOneAndUpdate(
     { _id: tweetId },
-    { $set: { content: content } }
+    { $set: { content: content } },
+    {new:true}
   );
 
   if (!tweet) {
@@ -72,7 +72,7 @@ const deleteTweet = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Invalid tweet id.");
   }
 
-  const tweet = await Tweet.findByIdAndDelete({_id:tweetId});
+  const tweet = await Tweet.findByIdAndDelete({ _id: tweetId });
 
   if (!tweet) {
     throw new ApiError(404, "Tweet not found.");

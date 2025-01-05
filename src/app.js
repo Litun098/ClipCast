@@ -12,6 +12,8 @@ import subscriptionRoutes from "./routes/subscription.routes.js";
 import userRouter from "./routes/user.routes.js";
 import videoRoutes from "./routes/video.routes.js";
 import tweetRoutes from "./routes/tweet.routes.js"
+import playlistRoutes from "./routes/playlist.routes.js"
+import dashboardRoutes from "./routes/dashboard.routes.js"
 
 const app = express();
 
@@ -34,5 +36,7 @@ app.use("/api/v1/comments", commentRoutes);
 app.use("/api/v1/subscription", subscriptionRoutes);
 app.use("/api/v1/likes", likeRoutes);
 app.use("/api/v1/tweets", tweetRoutes);
+app.use("/api/v1/playlist", playlistRoutes);
+app.use("/api/v1/dashboard", dashboardRoutes);
 
 export { app };

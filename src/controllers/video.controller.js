@@ -1,11 +1,13 @@
 import mongoose, { isValidObjectId } from "mongoose";
 
+import jwt from "jsonwebtoken";
+
+import { User } from "../models/user.model.js";
 import { Video } from "../models/video.model.js";
 import { ApiError } from "../utils/apiErrors.js";
 import { ApiResponse } from "../utils/apiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { deleteImage, uploadOnCloudinary } from "../utils/cloudinary.js";
-
 
 const getAllVideos = asyncHandler(async (req, res) => {
   const { page = 1, limit = 10, query, sortBy, sortType, userId } = req.query;
@@ -108,12 +110,41 @@ const publishAVideo = asyncHandler(async (req, res) => {
 const getVideoById = asyncHandler(async (req, res) => {
   const { videoId } = req.params;
   try {
-    const existVideo = await Video.findById(videoId);
+    const existVideo = await Video.findByIdAndUpdate(
+      { _id: videoId },
+      { $inc: { views: 1 } }, // Increment the views count by 1
+      { new: true } // Return the updated document
+    );
+
+    const token =
+      req.cookies?.accessToken ||
+      req.header("Authorization")?.replace("Bearer ", "");
+
+    if (token) {
+      const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+      const user = await User.findById(decodedToken?._id).select(
+        "-password -refreshToken"
+      );
+      if (user) {
+        const videoIndex = user.watchHistory.indexOf(videoId);
+      
+        // If video is not in the history, add it
+        if (videoIndex === -1) {
+          user.watchHistory.push(videoId);
+        } else {
+          // If video exists, move it to the beginning
+          user.watchHistory.splice(videoIndex, 1); // Remove it from its current position
+          user.watchHistory.unshift(videoId); // Add it to the beginning
+        }
+        await user.save(); // Save the updated user document
+      }
+    }
+
     return res
-      .status(201)
+      .status(200)
       .json(new ApiResponse(200, existVideo, "Video fetched successfully."));
   } catch (error) {
-    throw new ApiError(500, "Video does't exist!");
+    throw new ApiError(500, error, "Video does't exist!");
   }
 });
 
