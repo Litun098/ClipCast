@@ -15,6 +15,8 @@ const getChannelStats = asyncHandler(async (req, res) => {
   }
 
   console.log(channelId);
+
+  const userDetails = await User.findById(channelId);
   
   // Fetch total videos and total views for the channel
   const videosStats = await Video.aggregate([
@@ -46,6 +48,7 @@ const getChannelStats = asyncHandler(async (req, res) => {
     new ApiResponse(
       200,
       {
+        userDetails,
         totalVideos,
         totalViews,
         totalSubscribers,
