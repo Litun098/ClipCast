@@ -89,11 +89,12 @@ src/
 
 ### Authentication
 
-#### **Register a New User**
+#### Register a New User
 
-- **Method:** `POST` 
+-**Method:** `POST` 
+
 -**URL**: `localhost:8000/api/v1/users/register`
-  **Request Body (form-data):**
+  ## Request Body (form-data):
     ```json
     {
       "username": "string",
@@ -103,7 +104,7 @@ src/
       "coverImage": "file (optional)"
     }
     ```
-  **Response:**
+  ## Response:
     ```json
     {
       "success": true,
@@ -261,9 +262,9 @@ src/
 
 ## Get Video with Id
 
-**Method:** `GET`
+-**Method:** `GET`
 
-**URL:** `http://localhost:8000/api/v1/videos/677a1eccaaba8f58c614a18b`
+-**URL:** `http://localhost:8000/api/v1/videos/677a1eccaaba8f58c614a18b`
 
 **Response Body:**
 
@@ -328,7 +329,7 @@ src/
 
 ### Request
 
-- **Method**: POST
+- **Method**: `POST`
 - **URL**: `http://localhost:8000/api/v1/comments/6762fa888435da7925c0f4a8`
 - **Body**:
   ```json
@@ -482,7 +483,7 @@ src/
 
 ### Request
 
-- **Method**: POST
+- **Method**: `POST`
 - **URL**: `localhost:8000/api/v1/subscription/c/6650db452a493b1ea757dace`
 
 ### Response
@@ -600,7 +601,7 @@ src/
 
 #### Request
 
-- **Method:** POST
+- **Method:** `POST`
 - **URL:** `http://localhost:8000/api/v1/likes/toggle/v/67681eb62dcadc59233256b2`
 
 #### Response
@@ -629,7 +630,7 @@ src/
 
 ## Request
 
-- **Method:** POST
+- **Method:** `POST`
 - **URL:** `http://localhost:8000/api/v1/likes/toggle/c/6770100581f936ea3b1ce221`
 
 #### Response
@@ -651,7 +652,7 @@ src/
 
 #### Request
 
-- **Method:** POST
+- **Method:** `POST`
 - **URL:** `http://localhost:8000/api/v1/likes/toggle/t/677949eb90b74bbf77220c9c`
 
 #### Response
@@ -673,7 +674,7 @@ src/
 
 ## Request: Get Liked Videos
 
--**Method**: GET  
+-**Method**: `GET`  
 -**URL**: `localhost:8000/api/v1/likes/videos`
 
 ## Response
@@ -707,9 +708,10 @@ src/
 
 ## Create Tweet
 
-**Request:**
+## Request:
 
--**Method**: `POST` -**URL**: `http://localhost:8000/api/v1/tweets/`
+-**Method**: `POST` 
+-**URL**: `http://localhost:8000/api/v1/tweets/`
 
 **Body**:
 
@@ -745,7 +747,7 @@ src/
 
 ### Request
 
-- **Method**: GET
+- **Method**: `GET`
 - **URL**: `localhost:8000/api/v1/tweets/user/6762f5a7885c3668f778aa04`
 
 ### Response
@@ -863,7 +865,9 @@ src/
 
 ## Delete Tweet
 
-**Request:** -**Method:** DELETE -**URL**: `localhost:8000/api/v1/tweets/677949e790b74bbf77220c96
+## Request: 
+-**Method:** `DELETE`
+-**URL**: `localhost:8000/api/v1/tweets/677949e790b74bbf77220c96`
 
 **Response:**
 
@@ -885,9 +889,10 @@ src/
 
 ### Create Playlist
 
-**Request:**
+## Request:
 
--**Method:** POST -**URL**: `localhost:8000/api/v1/playlist/
+-**Method:** `POST` 
+-**URL**: `localhost:8000/api/v1/playlist/`
 
 **Request Body:**
 
@@ -924,7 +929,8 @@ src/
 
 **Request:**
 
--**Method:** PATCH -**URL**: `localhost:8000/api/v1/playlist/add/677a1eccaaba8f58c614a18b/677aadb4965a3c57419244d6
+-**Method:** `PATCH` 
+-**URL**: `localhost:8000/api/v1/playlist/add/677a1eccaaba8f58c614a18b/677aadb4965a3c57419244d6`
 
 **Response:**
 
@@ -952,7 +958,8 @@ src/
 
 **Request:**
 
--**Method:** GET -**URL**: `localhost:8000/api/v1/playlist/677aadb4965a3c57419244d6
+-**Method:** `GET` 
+-**Url:** `localhost:8000/api/v1/playlist/677aadb4965a3c57419244d6`
 
 **Response:**
 
@@ -982,9 +989,10 @@ src/
 
 ### Update Playlist
 
-**Request:**
+## Request:
 
--**Method:** PATCH -**URL**: `localhost:8000/api/v1/playlist/677aadb4965a3c57419244d6
+-**Method:** `PATCH` 
+-**Url:** `localhost:8000/api/v1/playlist/677aadb4965a3c57419244d6`
 
 **Request Body:**
 
@@ -1019,9 +1027,10 @@ src/
 
 ### Remove Video from Playlist
 
-**Request:**
+## Request:
 
--**Method**: PATCH -**URL**: `localhost:8000/api/v1/playlist/remove/677a1eccaaba8f58c614a18b/677aadb4965a3c57419244d6
+-**Method:** `PATCH` 
+-**Url:** `localhost:8000/api/v1/playlist/remove/677a1eccaaba8f58c614a18b/677aadb4965a3c57419244d6`
 
 **Response:**
 
