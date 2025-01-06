@@ -156,12 +156,12 @@ src/
 
 **Response:**
 
-    ```json
+```json
     {
       "success": true,
       "message": "Logged out successfully"
     }
-    ```
+```
 
 ## Video API Endpoints
 
@@ -711,6 +711,7 @@ src/
 ## Request:
 
 -**Method**: `POST` 
+
 -**URL**: `http://localhost:8000/api/v1/tweets/`
 
 **Body**:
@@ -748,6 +749,7 @@ src/
 ### Request
 
 - **Method**: `GET`
+
 - **URL**: `localhost:8000/api/v1/tweets/user/6762f5a7885c3668f778aa04`
 
 ### Response
@@ -835,6 +837,7 @@ src/
 **Request:**
 
 -**Method:** `PATCH` 
+
 -**URL**: `localhost:8000/api/v1/tweets/677a18d74d85d8be06ead817`
 
 **Request Body:**
@@ -867,6 +870,7 @@ src/
 
 ## Request: 
 -**Method:** `DELETE`
+
 -**URL**: `localhost:8000/api/v1/tweets/677949e790b74bbf77220c96`
 
 **Response:**
@@ -892,6 +896,7 @@ src/
 ## Request:
 
 -**Method:** `POST` 
+
 -**URL**: `localhost:8000/api/v1/playlist/`
 
 **Request Body:**
@@ -930,6 +935,7 @@ src/
 **Request:**
 
 -**Method:** `PATCH` 
+
 -**URL**: `localhost:8000/api/v1/playlist/add/677a1eccaaba8f58c614a18b/677aadb4965a3c57419244d6`
 
 **Response:**
@@ -959,6 +965,7 @@ src/
 **Request:**
 
 -**Method:** `GET` 
+
 -**Url:** `localhost:8000/api/v1/playlist/677aadb4965a3c57419244d6`
 
 **Response:**
@@ -992,6 +999,7 @@ src/
 ## Request:
 
 -**Method:** `PATCH` 
+
 -**Url:** `localhost:8000/api/v1/playlist/677aadb4965a3c57419244d6`
 
 **Request Body:**
@@ -1030,6 +1038,7 @@ src/
 ## Request:
 
 -**Method:** `PATCH` 
+
 -**Url:** `localhost:8000/api/v1/playlist/remove/677a1eccaaba8f58c614a18b/677aadb4965a3c57419244d6`
 
 **Response:**
@@ -1058,7 +1067,8 @@ src/
 
 #### Request
 
-- **Method**: GET
+- **Method**: `GET`
+
 - **URL**: `localhost:8000/api/v1/playlist/user/6762f5a7885c3668f778aa04`
 
 #### Response
@@ -1164,14 +1174,16 @@ src/
 
 **Request**
 
-- **Method**: DELETE
+- **Method**: `DELETE`
+
 - **URL**: `localhost:8000/api/v1/playlist/677a1ca4aaba8f58c614a140`
 
 ---
 
 **Response:**
 
-- **Method**: DELETE
+- **Method**: `DELETE`
+
 - **URL**: `localhost:8000/api/v1/playlist/677a1ca4aaba8f58c614a140`
 - **Code**: 200
 
@@ -1201,7 +1213,8 @@ src/
 
 ### channel stats
 
-- **Method**: GET
+- **Method**: `GET`
+
 - **URL**: `localhost:8000/api/v1/dashboard/stats/6762f5a7885c3668f778aa04`
 
 ---
@@ -1244,7 +1257,8 @@ src/
 
 ## channel videos
 
-- **Method**: GET
+- **Method**: `GET`
+
 - **URL**: `localhost:8000/api/v1/dashboard/videos/6762f5a7885c3668f778aa04`
 
 ---
