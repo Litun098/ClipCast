@@ -85,16 +85,15 @@ src/
 - **nodemon**: Automatically restart the server on file changes.
 - **prettier**: Code formatter to maintain consistent coding style.
 
-
-
 # API Endpoints
 
 ### Authentication
 
 #### **Register a New User**
 
-- **POST** `/api/v1/users/register`
-  - Request Body (form-data):
+- **Method:** `POST` 
+-**URL**: `localhost:8000/api/v1/users/register`
+  **Request Body (form-data):**
     ```json
     {
       "username": "string",
@@ -104,7 +103,7 @@ src/
       "coverImage": "file (optional)"
     }
     ```
-  - Response:
+  **Response:**
     ```json
     {
       "success": true,
@@ -123,15 +122,15 @@ src/
 
 #### **Log In a User**
 
-- **POST** `/api/v1/users/login`
-  - Request Body (JSON):
+**POST** `localhost:8000/api/v1/users/login`
+  - **Request Body (JSON):**
     ```json
     {
       "email": "string",
       "password": "string"
     }
     ```
-  - Response:
+  - **Response:**
     ```json
     {
       "success": true,
@@ -150,8 +149,12 @@ src/
 
 #### **Log Out a User**
 
-- **POST** `/api/v1/users/logout`
-  - Response:
+-**Method:** `POST`
+
+-**URL:** `localhost:8000/api/v1/users/logout`
+
+**Response:**
+
     ```json
     {
       "success": true,
@@ -165,7 +168,7 @@ src/
 
 ### Request
 
-- **Method**: GET
+- **Method**: `GET`
 - **URL**: `http://localhost:8000/api/v1/videos`
 
 ### Response
@@ -223,17 +226,19 @@ src/
 
 ### Upload Video
 
-**Method:** POST
+-**Method:** `POST`
 
-**URL:** `http://localhost:8000/api/v1/videos/upload-video`
+-**URL:** `http://localhost:8000/api/v1/videos/upload-video`
 
 **Request Body (Form Data):**
+
 - **thumbnail**: (File)
 - **video**: (File)
 - **title**: `Video Title`
 - **description**: `Description of the video`
 
 **Response Body:**
+
 ```json
 {
   "statusCode": 200,
@@ -256,11 +261,12 @@ src/
 
 ## Get Video with Id
 
-**Method:** GET
+**Method:** `GET`
 
 **URL:** `http://localhost:8000/api/v1/videos/677a1eccaaba8f58c614a18b`
 
 **Response Body:**
+
 ```json
 {
   "statusCode": 200,
@@ -286,10 +292,6 @@ src/
 - **Method**: `DELETE`
 - **URL**: `localhost:8000/api/v1/videos/6762fb45614d4e2a6988cfd1`
 
-No response body.
-
----
-
 ### Toggle Publish Status
 
 - **Method**: `PATCH`
@@ -299,26 +301,26 @@ No response body.
 
 - **Status Code**: 200
 - **Response Body**:
+
 ```json
 {
-    "statusCode": 200,
-    "data": {
-        "_id": "6762fa888435da7925c0f4a8",
-        "videoFile": "https://res.cloudinary.com/dbcc9vr2u/video/upload/v1734539910/vikiix0adidauvelvpm4.mp4",
-        "thumbnail": "https://res.cloudinary.com/dbcc9vr2u/image/upload/v1734539900/duqrnkqztkmc90acxdln.webp",
-        "title": "First Video",
-        "description": "Description of first video",
-        "duration": 4,
-        "views": 39,
-        "isPublished": true,
-        "owner": "6762f5a7885c3668f778aa04",
-        "__v": 0
-    },
-    "message": "Video publish status updated to published",
-    "success": true
+  "statusCode": 200,
+  "data": {
+    "_id": "6762fa888435da7925c0f4a8",
+    "videoFile": "https://res.cloudinary.com/dbcc9vr2u/video/upload/v1734539910/vikiix0adidauvelvpm4.mp4",
+    "thumbnail": "https://res.cloudinary.com/dbcc9vr2u/image/upload/v1734539900/duqrnkqztkmc90acxdln.webp",
+    "title": "First Video",
+    "description": "Description of first video",
+    "duration": 4,
+    "views": 39,
+    "isPublished": true,
+    "owner": "6762f5a7885c3668f778aa04",
+    "__v": 0
+  },
+  "message": "Video publish status updated to published",
+  "success": true
 }
 ```
-
 
 ## Comments
 
@@ -354,114 +356,123 @@ No response body.
     "success": true
   }
   ```
-## API Endpoints for Comments
+
+## Comments
 
 ### Get Video Comments
 
 **Request:**
+
 - **Method:** `GET`
 - **URL:** `localhost:8000/api/v1/comments/6762fa888435da7925c0f4a8`
 
 **Response:**
+
 ```json
 {
-    "statusCode": 200,
-    "data": {
-        "docs": [
-            {
-                "_id": "677a9af3a62f54352a409e27",
-                "content": "Nice Video",
-                "video": "6762fa888435da7925c0f4a8",
-                "owner": "6762f5a7885c3668f778aa04",
-                "createdAt": "2025-01-05T14:45:07.137Z",
-                "updatedAt": "2025-01-05T14:45:07.137Z",
-                "__v": 0
-            },
-            {
-                "_id": "677a9a839503a1566148cfce",
-                "content": "Nice Video",
-                "video": "6762fa888435da7925c0f4a8",
-                "owner": "6762f5a7885c3668f778aa04",
-                "createdAt": "2025-01-05T14:43:15.804Z",
-                "updatedAt": "2025-01-05T14:43:15.804Z",
-                "__v": 0
-            },
-            {
-                "_id": "677a9a329503a1566148cfca",
-                "content": "Nice Video",
-                "video": "6762fa888435da7925c0f4a8",
-                "owner": "6762f5a7885c3668f778aa04",
-                "createdAt": "2025-01-05T14:41:54.537Z",
-                "updatedAt": "2025-01-05T14:41:54.537Z",
-                "__v": 0
-            },
-            {
-                "_id": "6770100581f936ea3b1ce221",
-                "content": "Nice video. Very comprehensive.",
-                "video": "6762fa888435da7925c0f4a8",
-                "owner": "6762f5a7885c3668f778aa04",
-                "createdAt": "2024-12-28T14:49:41.648Z",
-                "updatedAt": "2024-12-28T14:49:41.648Z",
-                "__v": 0
-            }
-        ],
-        "totalDocs": 4,
-        "limit": 10,
-        "page": 1,
-        "totalPages": 1,
-        "pagingCounter": 1,
-        "hasPrevPage": false,
-        "hasNextPage": false,
-        "prevPage": null,
-        "nextPage": null
-    },
-    "message": "Comments fetched successfully.",
-    "success": true
+  "statusCode": 200,
+  "data": {
+    "docs": [
+      {
+        "_id": "677a9af3a62f54352a409e27",
+        "content": "Nice Video",
+        "video": "6762fa888435da7925c0f4a8",
+        "owner": "6762f5a7885c3668f778aa04",
+        "createdAt": "2025-01-05T14:45:07.137Z",
+        "updatedAt": "2025-01-05T14:45:07.137Z",
+        "__v": 0
+      },
+      {
+        "_id": "677a9a839503a1566148cfce",
+        "content": "Nice Video",
+        "video": "6762fa888435da7925c0f4a8",
+        "owner": "6762f5a7885c3668f778aa04",
+        "createdAt": "2025-01-05T14:43:15.804Z",
+        "updatedAt": "2025-01-05T14:43:15.804Z",
+        "__v": 0
+      },
+      {
+        "_id": "677a9a329503a1566148cfca",
+        "content": "Nice Video",
+        "video": "6762fa888435da7925c0f4a8",
+        "owner": "6762f5a7885c3668f778aa04",
+        "createdAt": "2025-01-05T14:41:54.537Z",
+        "updatedAt": "2025-01-05T14:41:54.537Z",
+        "__v": 0
+      },
+      {
+        "_id": "6770100581f936ea3b1ce221",
+        "content": "Nice video. Very comprehensive.",
+        "video": "6762fa888435da7925c0f4a8",
+        "owner": "6762f5a7885c3668f778aa04",
+        "createdAt": "2024-12-28T14:49:41.648Z",
+        "updatedAt": "2024-12-28T14:49:41.648Z",
+        "__v": 0
+      }
+    ],
+    "totalDocs": 4,
+    "limit": 10,
+    "page": 1,
+    "totalPages": 1,
+    "pagingCounter": 1,
+    "hasPrevPage": false,
+    "hasNextPage": false,
+    "prevPage": null,
+    "nextPage": null
+  },
+  "message": "Comments fetched successfully.",
+  "success": true
 }
 ```
 
 ### Delete Comment
 
 **Request:**
+
 - **Method:** `DELETE`
 - **URL:** `localhost:8000/api/v1/comments/c/677a9a329503a1566148cfca`
 
 **Response:**
+
 ```json
 {
-    "statusCode": 200,
-    "data": "Comment deleted successfully.",
-    "message": "Success",
-    "success": true
+  "statusCode": 200,
+  "data": "Comment deleted successfully.",
+  "message": "Success",
+  "success": true
 }
 ```
 
-### 3. Update Comment
+### Update Comment
 
 **Request:**
+
 - **Method:** `PATCH`
 - **URL:** `localhost:8000/api/v1/comments/c/6770100581f936ea3b1ce221`
 - **Body:**
+
 ```json
 {
-    "content": "Updated comment 😁"
+  "content": "Updated comment 😁"
 }
+```
 
 **Response:**
+
 ```json
 {
-    "statusCode": 200,
-    "data": {
-        "_id": "6770100581f936ea3b1ce221",
-        "content": "Updated comment 😁",
-        "video": "6762fa888435da7925c0f4a8",
-        "owner": "6762f5a7885c3668f778aa04",
-        "createdAt": "2024-12-28T14:49:41.648Z",
-        "updatedAt": "2025-01-05T15:51:20.815Z",
-        "__v": 0
-    },
-    "message": "Comment updated successfully.",
-    "success": true
+  "statusCode": 200,
+  "data": {
+    "_id": "6770100581f936ea3b1ce221",
+    "content": "Updated comment 😁",
+    "video": "6762fa888435da7925c0f4a8",
+    "owner": "6762f5a7885c3668f778aa04",
+    "createdAt": "2024-12-28T14:49:41.648Z",
+    "updatedAt": "2025-01-05T15:51:20.815Z",
+    "__v": 0
+  },
+  "message": "Comment updated successfully.",
+  "success": true
 }
 ```
 
@@ -470,6 +481,7 @@ No response body.
 ## Subscribe to a Channel
 
 ### Request
+
 - **Method**: POST
 - **URL**: `localhost:8000/api/v1/subscription/c/6650db452a493b1ea757dace`
 
@@ -477,16 +489,17 @@ No response body.
 
 ```json
 {
-    "statusCode": 200,
-    "data": "Subscribed to nayak",
-    "message": "Success",
-    "success": true
+  "statusCode": 200,
+  "data": "Subscribed to nayak",
+  "message": "Success",
+  "success": true
 }
 ```
 
 ## Get All Subscribed Channels
 
 ### Request
+
 - **Method**: GET
 - **URL**: `localhost:8000/api/v1/subscription/c/6762f5a7885c3668f778aa04`
 
@@ -494,27 +507,28 @@ No response body.
 
 ```json
 {
-    "statusCode": 200,
-    "data": [
-        {
-            "_id": "677aabc3965a3c57419244a3",
-            "subscriber": {
-                "_id": "6762f5a7885c3668f778aa04",
-                "username": "litun098",
-                "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1734538659/efjbolkn8cjgvqabulal.jpg"
-            },
-            "channel": "6762f5a7885c3668f778aa04",
-            "__v": 0
-        }
-    ],
-    "message": "Success",
-    "success": true
+  "statusCode": 200,
+  "data": [
+    {
+      "_id": "677aabc3965a3c57419244a3",
+      "subscriber": {
+        "_id": "6762f5a7885c3668f778aa04",
+        "username": "litun098",
+        "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1734538659/efjbolkn8cjgvqabulal.jpg"
+      },
+      "channel": "6762f5a7885c3668f778aa04",
+      "__v": 0
+    }
+  ],
+  "message": "Success",
+  "success": true
 }
 ```
 
 ## Get Channels a User is Subscribed To
 
 ### Request
+
 - **Method**: GET
 - **URL**: `localhost:8000/api/v1/subscription/u/6762f5a7885c3668f778aa04`
 
@@ -522,237 +536,195 @@ No response body.
 
 ```json
 {
-    "statusCode": 200,
-    "data": [
-        {
-            "_id": "677aab5d4def1a8d7268271f",
-            "subscriber": "6762f5a7885c3668f778aa04",
-            "channel": {
-                "_id": "677a940b35f3f6f35d2d8023",
-                "username": "helga50",
-                "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1736086525/dmmqufbzltlf7nqt8x6p.jpg"
-            },
-            "__v": 0
-        },
-        {
-            "_id": "677aab714def1a8d72682724",
-            "subscriber": "6762f5a7885c3668f778aa04",
-            "channel": {
-                "_id": "677a94a435f3f6f35d2d8027",
-                "username": "letha.weimann82",
-                "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1736086968/nag2dqgfciyymzt41svl.jpg"
-            },
-            "__v": 0
-        },
-        {
-            "_id": "677aabb2965a3c574192449e",
-            "subscriber": "6762f5a7885c3668f778aa04",
-            "channel": {
-                "_id": "6770110fcbe4da11333ee47f",
-                "username": "{{random.username}}",
-                "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1735397634/mhx8lnaiwmamrerd9fzr.jpg"
-            },
-            "__v": 0
-        },
-        {
-            "_id": "677aabc3965a3c57419244a3",
-            "subscriber": "6762f5a7885c3668f778aa04",
-            "channel": {
-                "_id": "6762f5a7885c3668f778aa04",
-                "username": "litun098",
-                "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1734538659/efjbolkn8cjgvqabulal.jpg"
-            },
-            "__v": 0
-        },
-        {
-            "_id": "677aabd8965a3c57419244a8",
-            "subscriber": "6762f5a7885c3668f778aa04",
-            "channel": {
-                "_id": "6650db452a493b1ea757dace",
-                "username": "nayak",
-                "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1716575029/qemsz1mp1yo09bxy7b2o.jpg"
-            },
-            "__v": 0
-        }
-    ],
-    "message": "Success",
-    "success": true
+  "statusCode": 200,
+  "data": [
+    {
+      "_id": "677aab5d4def1a8d7268271f",
+      "subscriber": "6762f5a7885c3668f778aa04",
+      "channel": {
+        "_id": "677a940b35f3f6f35d2d8023",
+        "username": "helga50",
+        "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1736086525/dmmqufbzltlf7nqt8x6p.jpg"
+      },
+      "__v": 0
+    },
+    {
+      "_id": "677aab714def1a8d72682724",
+      "subscriber": "6762f5a7885c3668f778aa04",
+      "channel": {
+        "_id": "677a94a435f3f6f35d2d8027",
+        "username": "letha.weimann82",
+        "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1736086968/nag2dqgfciyymzt41svl.jpg"
+      },
+      "__v": 0
+    },
+    {
+      "_id": "677aabb2965a3c574192449e",
+      "subscriber": "6762f5a7885c3668f778aa04",
+      "channel": {
+        "_id": "6770110fcbe4da11333ee47f",
+        "username": "{{random.username}}",
+        "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1735397634/mhx8lnaiwmamrerd9fzr.jpg"
+      },
+      "__v": 0
+    },
+    {
+      "_id": "677aabc3965a3c57419244a3",
+      "subscriber": "6762f5a7885c3668f778aa04",
+      "channel": {
+        "_id": "6762f5a7885c3668f778aa04",
+        "username": "litun098",
+        "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1734538659/efjbolkn8cjgvqabulal.jpg"
+      },
+      "__v": 0
+    },
+    {
+      "_id": "677aabd8965a3c57419244a8",
+      "subscriber": "6762f5a7885c3668f778aa04",
+      "channel": {
+        "_id": "6650db452a493b1ea757dace",
+        "username": "nayak",
+        "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1716575029/qemsz1mp1yo09bxy7b2o.jpg"
+      },
+      "__v": 0
+    }
+  ],
+  "message": "Success",
+  "success": true
 }
 ```
 
-## Like API 
-
-## Endpoints
+## Like API
 
 ### Like Video
 
 #### Request
-- **Method:** POST  
+
+- **Method:** POST
 - **URL:** `http://localhost:8000/api/v1/likes/toggle/v/67681eb62dcadc59233256b2`
 
 #### Response
+
 **Status:** `201 Created`
 
-**Headers:**
-- `X-Powered-By`: Express
-- `Access-Control-Allow-Origin`: *
-- `Access-Control-Allow-Credentials`: true
-- `Content-Type`: application/json; charset=utf-8
-- `Content-Length`: 259
-- `ETag`: W/"103-nceVHjJoT0OsUxd+HLQaAm3vAoo"
-- `Date`: Sun, 05 Jan 2025 15:59:37 GMT
-- `Connection`: keep-alive
-- `Keep-Alive`: timeout=5
-
 **Body:**
+
 ```json
 {
-    "statusCode": 201,
-    "data": {
-        "_id": "6776a6897e2cae35a8bcb62e",
-        "video": "6762fa888435da7925c0f4a8",
-        "likedBy": "6762f5a7885c3668f778aa04",
-        "createdAt": "2025-01-02T14:45:29.955Z",
-        "updatedAt": "2025-01-02T14:45:29.955Z",
-        "__v": 0
-    },
-    "message": "Dislike video",
-    "success": true
+  "statusCode": 201,
+  "data": {
+    "_id": "6776a6897e2cae35a8bcb62e",
+    "video": "6762fa888435da7925c0f4a8",
+    "likedBy": "6762f5a7885c3668f778aa04",
+    "createdAt": "2025-01-02T14:45:29.955Z",
+    "updatedAt": "2025-01-02T14:45:29.955Z",
+    "__v": 0
+  },
+  "message": "Dislike video",
+  "success": true
 }
 ```
-
----
 
 ### Like Comment
 
-#### Request
-- **Method:** POST  
+## Request
+
+- **Method:** POST
 - **URL:** `http://localhost:8000/api/v1/likes/toggle/c/6770100581f936ea3b1ce221`
 
 #### Response
+
 **Status:** `201 Created`
 
 **Body:**
+
 ```json
 {
-    "statusCode": 201,
-    "data": "Liked comment",
-    "message": "Success",
-    "success": true
+  "statusCode": 201,
+  "data": "Liked comment",
+  "message": "Success",
+  "success": true
 }
 ```
-
----
 
 ### Like Tweet
 
 #### Request
-- **Method:** POST  
+
+- **Method:** POST
 - **URL:** `http://localhost:8000/api/v1/likes/toggle/t/677949eb90b74bbf77220c9c`
 
 #### Response
+
 **Status:** `201 Created`
 
-**Headers:**
-- `X-Powered-By`: Express
-- `Access-Control-Allow-Origin`: *
-- `Access-Control-Allow-Credentials`: true
-- `Content-Type`: application/json; charset=utf-8
-- `Content-Length`: 74
-- `ETag`: W/"4a-HBLo0W0teIR+aTCRZuIWJe22o/E"
-- `Date`: Sun, 05 Jan 2025 16:01:54 GMT
-- `Connection`: keep-alive
-- `Keep-Alive`: timeout=5
-
 **Body:**
+
 ```json
 {
-    "statusCode": 201,
-    "data": "Liked tweet",
-    "message": "Success",
-    "success": true
+  "statusCode": 201,
+  "data": "Liked tweet",
+  "message": "Success",
+  "success": true
 }
 ```
 
 ---
 
-
 ## Request: Get Liked Videos
 
-**Method**: GET  
-**URL**: `localhost:8000/api/v1/likes/videos`
-
-### Request URL Breakdown:
-- **Host**: `localhost`
-- **Port**: `8000`
-- **Path**: `/api/v1/likes/videos`
+-**Method**: GET  
+-**URL**: `localhost:8000/api/v1/likes/videos`
 
 ## Response
-
-**Status**: Created  
-**Status Code**: 201  
-**Language**: JSON
-
-### Response Headers:
-- **X-Powered-By**: `Express`
-- **Access-Control-Allow-Origin**: `*`
-- **Access-Control-Allow-Credentials**: `true`
-- **Content-Type**: `application/json; charset=utf-8`
-- **Content-Length**: `451`
-- **ETag**: `W/"1c3-ZXoPT7XQLqooYernDUvA4yHnS/I"`
-- **Date**: `Sun, 05 Jan 2025 16:02:19 GMT`
-- **Connection**: `keep-alive`
-- **Keep-Alive**: `timeout=5`
 
 ### Response Body:
 
 ```json
 {
-    "statusCode": 201,
-    "data": [
-        {
-            "_id": "67681eb62dcadc59233256b2",
-            "thumbnail": "https://res.cloudinary.com/dbcc9vr2u/image/upload/v1734876605/dktkljlnkwgl8rvcsepv.webp",
-            "title": "Second Video",
-            "description": "Description of second video",
-            "duration": 4,
-            "views": 2,
-            "owner": {
-                "_id": "6762f5a7885c3668f778aa04",
-                "username": "litun098",
-                "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1734538659/efjbolkn8cjgvqabulal.jpg"
-            }
-        }
-    ],
-    "message": "Success",
-    "success": true
+  "statusCode": 201,
+  "data": [
+    {
+      "_id": "67681eb62dcadc59233256b2",
+      "thumbnail": "https://res.cloudinary.com/dbcc9vr2u/image/upload/v1734876605/dktkljlnkwgl8rvcsepv.webp",
+      "title": "Second Video",
+      "description": "Description of second video",
+      "duration": 4,
+      "views": 2,
+      "owner": {
+        "_id": "6762f5a7885c3668f778aa04",
+        "username": "litun098",
+        "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1734538659/efjbolkn8cjgvqabulal.jpg"
+      }
+    }
+  ],
+  "message": "Success",
+  "success": true
 }
 ```
-# API Documentation: Tweets
+
+# Tweets
 
 ## Create Tweet
 
-### Request
+**Request:**
 
-**Method**: `POST`
-
-**URL**: `http://localhost:8000/api/v1/tweets/`
+-**Method**: `POST` -**URL**: `http://localhost:8000/api/v1/tweets/`
 
 **Body**:
+
 ```json
 {
   "content": "{{$randomCatchPhrase}}"
 }
 ```
 
-**Headers**:
-- None specified in the request.
-
 ### Response
 
 **Status**: `200 OK`
 
 **Response Body**:
+
 ```json
 {
   "statusCode": 201,
@@ -768,19 +740,6 @@ No response body.
   "success": true
 }
 ```
-
-**Response Headers**:
-- `X-Powered-By: Express`
-- `Access-Control-Allow-Origin: *`
-- `Access-Control-Allow-Credentials: true`
-- `Content-Type: application/json; charset=utf-8`
-- `Content-Length: 270`
-- `ETag: W/"10e-/1b5mCRfnHT88rEr6Bs42uitC4U"`
-- `Date: Sun, 05 Jan 2025 16:02:45 GMT`
-- `Connection: keep-alive`
-- `Keep-Alive: timeout=5`
-
-
 
 ## Get User Tweets
 
@@ -798,107 +757,94 @@ No response body.
 
 ```json
 {
-    "statusCode": 201,
-    "data": [
-        {
-            "_id": "677949e990b74bbf77220c99",
-            "content": "engage dot-com networks",
-            "owner": {
-                "_id": "6762f5a7885c3668f778aa04",
-                "username": "litun098",
-                "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1734538659/efjbolkn8cjgvqabulal.jpg"
-            }
-        },
-        {
-            "_id": "677949eb90b74bbf77220c9c",
-            "content": "engineer magnetic web services",
-            "owner": {
-                "_id": "6762f5a7885c3668f778aa04",
-                "username": "litun098",
-                "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1734538659/efjbolkn8cjgvqabulal.jpg"
-            }
-        },
-        {
-            "_id": "677949ff90b74bbf77220c9f",
-            "content": "Pre-emptive intermediate alliance",
-            "owner": {
-                "_id": "6762f5a7885c3668f778aa04",
-                "username": "litun098",
-                "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1734538659/efjbolkn8cjgvqabulal.jpg"
-            }
-        },
-        {
-            "_id": "67794a0290b74bbf77220ca2",
-            "content": "Exclusive neutral hub",
-            "owner": {
-                "_id": "6762f5a7885c3668f778aa04",
-                "username": "litun098",
-                "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1734538659/efjbolkn8cjgvqabulal.jpg"
-            }
-        },
-        {
-            "_id": "67794a0590b74bbf77220ca5",
-            "content": "Multi-tiered real-time synergy",
-            "owner": {
-                "_id": "6762f5a7885c3668f778aa04",
-                "username": "litun098",
-                "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1734538659/efjbolkn8cjgvqabulal.jpg"
-            }
-        },
-        {
-            "_id": "67794a0690b74bbf77220ca8",
-            "content": "Proactive content-based website",
-            "owner": {
-                "_id": "6762f5a7885c3668f778aa04",
-                "username": "litun098",
-                "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1734538659/efjbolkn8cjgvqabulal.jpg"
-            }
-        },
-        {
-            "_id": "67794a3290b74bbf77220cab",
-            "content": "Optimized empowering internet solution",
-            "owner": {
-                "_id": "6762f5a7885c3668f778aa04",
-                "username": "litun098",
-                "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1734538659/efjbolkn8cjgvqabulal.jpg"
-            }
-        }
-    ],
-    "message": "Success",
-    "success": true
+  "statusCode": 201,
+  "data": [
+    {
+      "_id": "677949e990b74bbf77220c99",
+      "content": "engage dot-com networks",
+      "owner": {
+        "_id": "6762f5a7885c3668f778aa04",
+        "username": "litun098",
+        "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1734538659/efjbolkn8cjgvqabulal.jpg"
+      }
+    },
+    {
+      "_id": "677949eb90b74bbf77220c9c",
+      "content": "engineer magnetic web services",
+      "owner": {
+        "_id": "6762f5a7885c3668f778aa04",
+        "username": "litun098",
+        "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1734538659/efjbolkn8cjgvqabulal.jpg"
+      }
+    },
+    {
+      "_id": "677949ff90b74bbf77220c9f",
+      "content": "Pre-emptive intermediate alliance",
+      "owner": {
+        "_id": "6762f5a7885c3668f778aa04",
+        "username": "litun098",
+        "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1734538659/efjbolkn8cjgvqabulal.jpg"
+      }
+    },
+    {
+      "_id": "67794a0290b74bbf77220ca2",
+      "content": "Exclusive neutral hub",
+      "owner": {
+        "_id": "6762f5a7885c3668f778aa04",
+        "username": "litun098",
+        "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1734538659/efjbolkn8cjgvqabulal.jpg"
+      }
+    },
+    {
+      "_id": "67794a0590b74bbf77220ca5",
+      "content": "Multi-tiered real-time synergy",
+      "owner": {
+        "_id": "6762f5a7885c3668f778aa04",
+        "username": "litun098",
+        "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1734538659/efjbolkn8cjgvqabulal.jpg"
+      }
+    },
+    {
+      "_id": "67794a0690b74bbf77220ca8",
+      "content": "Proactive content-based website",
+      "owner": {
+        "_id": "6762f5a7885c3668f778aa04",
+        "username": "litun098",
+        "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1734538659/efjbolkn8cjgvqabulal.jpg"
+      }
+    },
+    {
+      "_id": "67794a3290b74bbf77220cab",
+      "content": "Optimized empowering internet solution",
+      "owner": {
+        "_id": "6762f5a7885c3668f778aa04",
+        "username": "litun098",
+        "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1734538659/efjbolkn8cjgvqabulal.jpg"
+      }
+    }
+  ],
+  "message": "Success",
+  "success": true
 }
 ```
-
-#### Response Headers
-
-- `X-Powered-By`: Express
-- `Access-Control-Allow-Origin`: *
-- `Access-Control-Allow-Credentials`: true
-- `Content-Type`: application/json; charset=utf-8
-- `Content-Length`: 5340
-- `ETag`: W/"14dc-fBOzZKWsBkXgqLEGchUyBcyg/0Q"
-- `Date`: Sun, 05 Jan 2025 16:03:36 GMT
-- `Connection`: keep-alive
-- `Keep-Alive`: timeout=5
 
 ### Update Tweet
 
 **Request:**
 
-```http
-PATCH /api/v1/tweets/677a18d74d85d8be06ead817
-```
+-**Method:** `PATCH` 
+-**URL**: `localhost:8000/api/v1/tweets/677a18d74d85d8be06ead817`
 
 **Request Body:**
 
 ```json
-
 {
   "content": "Updated Managed non-volatile emulation"
 }
 ```
 
 **Response:**
+
 ```json
 {
   "statusCode": 200,
@@ -917,11 +863,8 @@ PATCH /api/v1/tweets/677a18d74d85d8be06ead817
 
 ## Delete Tweet
 
-**Request:**
+**Request:** -**Method:** DELETE -**URL**: `localhost:8000/api/v1/tweets/677949e790b74bbf77220c96
 
-```http
-DELETE /api/v1/tweets/677949e790b74bbf77220c96
-```
 **Response:**
 
 ```json
@@ -938,16 +881,13 @@ DELETE /api/v1/tweets/677949e790b74bbf77220c96
 }
 ```
 
-
 ## Playlist API
 
 ### Create Playlist
 
 **Request:**
 
-```http
-POST /api/v1/playlist/
-```
+-**Method:** POST -**URL**: `localhost:8000/api/v1/playlist/
 
 **Request Body:**
 
@@ -984,9 +924,7 @@ POST /api/v1/playlist/
 
 **Request:**
 
-```http
-PATCH /api/v1/playlist/add/677a1eccaaba8f58c614a18b/677aadb4965a3c57419244d6
-```
+-**Method:** PATCH -**URL**: `localhost:8000/api/v1/playlist/add/677a1eccaaba8f58c614a18b/677aadb4965a3c57419244d6
 
 **Response:**
 
@@ -998,9 +936,7 @@ PATCH /api/v1/playlist/add/677a1eccaaba8f58c614a18b/677aadb4965a3c57419244d6
       "_id": "677aadb4965a3c57419244d6",
       "name": "Gorgeous Fresh Tuna",
       "description": "copying the card won't do anything, we need to override the virtual SMTP matrix!",
-      "videos": [
-        "677a1eccaaba8f58c614a18b"
-      ],
+      "videos": ["677a1eccaaba8f58c614a18b"],
       "owner": "6762f5a7885c3668f778aa04",
       "createdAt": "2025-01-05T16:05:08.210Z",
       "updatedAt": "2025-01-05T16:06:22.887Z",
@@ -1016,9 +952,7 @@ PATCH /api/v1/playlist/add/677a1eccaaba8f58c614a18b/677aadb4965a3c57419244d6
 
 **Request:**
 
-```http
-GET /api/v1/playlist/677aadb4965a3c57419244d6
-```
+-**Method:** GET -**URL**: `localhost:8000/api/v1/playlist/677aadb4965a3c57419244d6
 
 **Response:**
 
@@ -1030,9 +964,7 @@ GET /api/v1/playlist/677aadb4965a3c57419244d6
       "_id": "677aadb4965a3c57419244d6",
       "name": "Gorgeous Fresh Tuna",
       "description": "copying the card won't do anything, we need to override the virtual SMTP matrix!",
-      "videos": [
-        "677a1eccaaba8f58c614a18b"
-      ],
+      "videos": ["677a1eccaaba8f58c614a18b"],
       "owner": {
         "_id": "6762f5a7885c3668f778aa04",
         "username": "litun098",
@@ -1052,16 +984,14 @@ GET /api/v1/playlist/677aadb4965a3c57419244d6
 
 **Request:**
 
-```http
-PATCH /api/v1/playlist/677aadb4965a3c57419244d6
-```
+-**Method:** PATCH -**URL**: `localhost:8000/api/v1/playlist/677aadb4965a3c57419244d6
 
 **Request Body:**
 
 ```json
 {
-    "name": "{{$randomPhrase}}",
-    "description": "Updated parsing the driver won't do anything, we need to back up the optical XML driver!"
+  "name": "{{$randomPhrase}}",
+  "description": "Updated parsing the driver won't do anything, we need to back up the optical XML driver!"
 }
 ```
 
@@ -1075,9 +1005,7 @@ PATCH /api/v1/playlist/677aadb4965a3c57419244d6
       "_id": "677aadb4965a3c57419244d6",
       "name": "If we copy the application, we can get to the RAM card through the auxiliary SDD bandwidth!",
       "description": "Updated parsing the driver won't do anything, we need to back up the optical XML driver!",
-      "videos": [
-        "677a1eccaaba8f58c614a18b"
-      ],
+      "videos": ["677a1eccaaba8f58c614a18b"],
       "owner": "6762f5a7885c3668f778aa04",
       "createdAt": "2025-01-05T16:05:08.210Z",
       "updatedAt": "2025-01-05T16:07:59.281Z",
@@ -1089,14 +1017,11 @@ PATCH /api/v1/playlist/677aadb4965a3c57419244d6
 }
 ```
 
-
 ### Remove Video from Playlist
 
 **Request:**
 
-```http
-PATCH /api/v1/playlist/remove/677a1eccaaba8f58c614a18b/677aadb4965a3c57419244d6
-```
+-**Method**: PATCH -**URL**: `localhost:8000/api/v1/playlist/remove/677a1eccaaba8f58c614a18b/677aadb4965a3c57419244d6
 
 **Response:**
 
@@ -1119,30 +1044,21 @@ PATCH /api/v1/playlist/remove/677a1eccaaba8f58c614a18b/677aadb4965a3c57419244d6
   "success": true
 }
 ```
+
 ### Get user playlists
 
 #### Request
+
 - **Method**: GET
 - **URL**: `localhost:8000/api/v1/playlist/user/6762f5a7885c3668f778aa04`
-  - Host: `localhost`
-  - Port: `8000`
-  - Path: `api/v1/playlist/user/6762f5a7885c3668f778aa04`
 
 #### Response
+
 - **Status**: OK
 - **Code**: 200
-- **Headers**:
-  - `X-Powered-By`: Express
-  - `Access-Control-Allow-Origin`: *
-  - `Access-Control-Allow-Credentials`: true
-  - `Content-Type`: application/json; charset=utf-8
-  - `Content-Length`: 7093
-  - `ETag`: W/"1bb5-S4RXLo0HY6PGRruVP99xWsJIOTE"
-  - `Date`: Sun, 05 Jan 2025 16:09:37 GMT
-  - `Connection`: keep-alive
-  - `Keep-Alive`: timeout=5
 
 #### Body
+
 ```json
 {
   "statusCode": 200,
@@ -1238,49 +1154,39 @@ PATCH /api/v1/playlist/remove/677a1eccaaba8f58c614a18b/677aadb4965a3c57419244d6
 ## Delete playlist
 
 **Request**
+
 - **Method**: DELETE
 - **URL**: `localhost:8000/api/v1/playlist/677a1ca4aaba8f58c614a140`
-  - **Host**: localhost
-  - **Port**: 8000
-  - **Path**:
-    - api
-    - v1
-    - playlist
-    - 677a1ca4aaba8f58c614a140
 
 ---
 
 **Response:**
 
-- **Original Request**:
 - **Method**: DELETE
 - **URL**: `localhost:8000/api/v1/playlist/677a1ca4aaba8f58c614a140`
-- **Host**: localhost
-- **Port**: 8000
-- **Status**: OK
 - **Code**: 200
 
 ---
 
 ### Response Body:
+
 ```json
 {
-    "statusCode": 200,
-    "data": {
-        "_id": "677a1ca4aaba8f58c614a140",
-        "name": "Licensed Soft Mouse",
-        "description": "Regional",
-        "videos": [],
-        "owner": "6762f5a7885c3668f778aa04",
-        "createdAt": "2025-01-05T05:46:12.852Z",
-        "updatedAt": "2025-01-05T05:46:12.852Z",
-        "__v": 0
-    },
-    "message": "Playlist deleted successfully",
-    "success": true
+  "statusCode": 200,
+  "data": {
+    "_id": "677a1ca4aaba8f58c614a140",
+    "name": "Licensed Soft Mouse",
+    "description": "Regional",
+    "videos": [],
+    "owner": "6762f5a7885c3668f778aa04",
+    "createdAt": "2025-01-05T05:46:12.852Z",
+    "updatedAt": "2025-01-05T05:46:12.852Z",
+    "__v": 0
+  },
+  "message": "Playlist deleted successfully",
+  "success": true
 }
 ```
-
 
 ## Dashboard
 
@@ -1288,51 +1194,40 @@ PATCH /api/v1/playlist/remove/677a1eccaaba8f58c614a18b/677aadb4965a3c57419244d6
 
 - **Method**: GET
 - **URL**: `localhost:8000/api/v1/dashboard/stats/6762f5a7885c3668f778aa04`
-  - **Host**: localhost
-  - **Port**: 8000
+
 ---
 
 #### Response:
-- **Status**: OK
-- **Code**: 200
-- **Content-Type**: application/json; charset=utf-8
-- **ETag**: W/"3a4-sNsPcybBCajmOPX/Awk3X+j2qfw"
-- **Date**: Sun, 05 Jan 2025 16:10:59 GMT
-- **Connection**: keep-alive
-- **Keep-Alive**: timeout=5
 
----
-
-#### Response Body:
 ```json
 {
-    "statusCode": 200,
-    "data": {
-        "userDetails": {
-            "_id": "6762f5a7885c3668f778aa04",
-            "username": "litun098",
-            "email": "nayaklitun9@gmail.com",
-            "fullName": "Litun Nayak",
-            "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1734538659/efjbolkn8cjgvqabulal.jpg",
-            "coverImage": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1734538661/akdmp1daknshduch7yto.jpg",
-            "watchHistory": [
-                "677a1eccaaba8f58c614a18b",
-                "6762fa888435da7925c0f4a8",
-                "67681eb62dcadc59233256b2"
-            ],
-            "password": "$2b$10$Clvdsk.IQLEOYjsyoQZyue91W9pjHiUmQGoZ9KMM/WbzrCNAqKb9K",
-            "createdAt": "2024-12-18T16:17:43.227Z",
-            "updatedAt": "2025-01-05T14:39:10.076Z",
-            "__v": 10,
-            "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzYyZjVhNzg4NWMzNjY4Zjc3OGFhMDQiLCJpYXQiOjE3MzYwODcwNzIsImV4cCI6MTczNzgxNTA3Mn0.9B0lrpNVkPLXa9UO3ClyGU9LmfQfX-rKsgZ-STPTCVc"
-        },
-        "totalVideos": 0,
-        "totalViews": 0,
-        "totalSubscribers": 1,
-        "totalLikes": 1
+  "statusCode": 200,
+  "data": {
+    "userDetails": {
+      "_id": "6762f5a7885c3668f778aa04",
+      "username": "litun098",
+      "email": "nayaklitun9@gmail.com",
+      "fullName": "Litun Nayak",
+      "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1734538659/efjbolkn8cjgvqabulal.jpg",
+      "coverImage": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1734538661/akdmp1daknshduch7yto.jpg",
+      "watchHistory": [
+        "677a1eccaaba8f58c614a18b",
+        "6762fa888435da7925c0f4a8",
+        "67681eb62dcadc59233256b2"
+      ],
+      "password": "$2b$10$Clvdsk.IQLEOYjsyoQZyue91W9pjHiUmQGoZ9KMM/WbzrCNAqKb9K",
+      "createdAt": "2024-12-18T16:17:43.227Z",
+      "updatedAt": "2025-01-05T14:39:10.076Z",
+      "__v": 10,
+      "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzYyZjVhNzg4NWMzNjY4Zjc3OGFhMDQiLCJpYXQiOjE3MzYwODcwNzIsImV4cCI6MTczNzgxNTA3Mn0.9B0lrpNVkPLXa9UO3ClyGU9LmfQfX-rKsgZ-STPTCVc"
     },
-    "message": "Channel stats fetched successfully.",
-    "success": true
+    "totalVideos": 0,
+    "totalViews": 0,
+    "totalSubscribers": 1,
+    "totalLikes": 1
+  },
+  "message": "Channel stats fetched successfully.",
+  "success": true
 }
 ```
 
@@ -1342,66 +1237,59 @@ PATCH /api/v1/playlist/remove/677a1eccaaba8f58c614a18b/677aadb4965a3c57419244d6
 
 - **Method**: GET
 - **URL**: `localhost:8000/api/v1/dashboard/videos/6762f5a7885c3668f778aa04`
-  - **Host**: localhost
-  - **Port**: 8000
+
 ---
 
 #### Response:
+
 - **Status**: OK
 - **Code**: 200
-- **Content-Type**: application/json; charset=utf-8
-- **ETag**: W/"2fe-ZTrP8dRaniU/6Vmw7aQZK1NW62U"
-- **Date**: Sun, 05 Jan 2025 14:09:13 GMT
-- **Connection**: keep-alive
-- **Keep-Alive**: timeout=5
 
 ---
 
 #### Response Body:
+
 ```json
 {
-    "statusCode": 200,
-    "data": [
-        {
-            "_id": "6762fa888435da7925c0f4a8",
-            "thumbnail": "https://res.cloudinary.com/dbcc9vr2u/image/upload/v1734539900/duqrnkqztkmc90acxdln.webp",
-            "title": "First Video",
-            "description": "Description of first video",
-            "duration": 4,
-            "views": 39
-        },
-        {
-            "_id": "67681eb62dcadc59233256b2",
-            "thumbnail": "https://res.cloudinary.com/dbcc9vr2u/image/upload/v1734876605/dktkljlnkwgl8rvcsepv.webp",
-            "title": "Second Video",
-            "description": "Description of second video",
-            "duration": 4,
-            "views": 2
-        },
-        {
-            "_id": "677a1eccaaba8f58c614a18b",
-            "thumbnail": "https://res.cloudinary.com/dbcc9vr2u/image/upload/v1736056483/shcf2rh1mdae9fzrhvhf.jpg",
-            "title": "third video",
-            "description": "Description of the video",
-            "duration": 4,
-            "views": 2
-        }
-    ],
-    "message": "Channel videos fetched successfully.",
-    "success": true
+  "statusCode": 200,
+  "data": [
+    {
+      "_id": "6762fa888435da7925c0f4a8",
+      "thumbnail": "https://res.cloudinary.com/dbcc9vr2u/image/upload/v1734539900/duqrnkqztkmc90acxdln.webp",
+      "title": "First Video",
+      "description": "Description of first video",
+      "duration": 4,
+      "views": 39
+    },
+    {
+      "_id": "67681eb62dcadc59233256b2",
+      "thumbnail": "https://res.cloudinary.com/dbcc9vr2u/image/upload/v1734876605/dktkljlnkwgl8rvcsepv.webp",
+      "title": "Second Video",
+      "description": "Description of second video",
+      "duration": 4,
+      "views": 2
+    },
+    {
+      "_id": "677a1eccaaba8f58c614a18b",
+      "thumbnail": "https://res.cloudinary.com/dbcc9vr2u/image/upload/v1736056483/shcf2rh1mdae9fzrhvhf.jpg",
+      "title": "third video",
+      "description": "Description of the video",
+      "duration": 4,
+      "views": 2
+    }
+  ],
+  "message": "Channel videos fetched successfully.",
+  "success": true
 }
 ```
-
-
-
-
 
 ## Running Tests
 
 Add your test cases and run:
+
 ```bash
 npm test
-````
+```
 
 ## License
 
@@ -1409,4 +1297,4 @@ This project is licensed under the ISC License. See the LICENSE file for details
 
 ## Author
 
-This project was developed by [Your Name/Team].
+This project was developed by Dibyakanta Nayak.
