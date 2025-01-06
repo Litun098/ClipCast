@@ -324,7 +324,7 @@ src/
 ## Update Cover Image
 
 ### Request:
-- **Method**: PATCH
+- **Method**: `PATCH`
 - **URL**: `http://localhost:8000/api/v1/users/cover-image`
 - **Body** (Form data):
 
@@ -357,7 +357,7 @@ src/
 ## User Channel Profile
 
 ### Request:
-- **Method**: GET
+- **Method**: `GET`
 - **URL**: `http://localhost:8000/api/v1/users/c/:username`
 
 ### Response:
@@ -385,7 +385,7 @@ src/
 ## Watch History
 
 ### Request:
-- **Method**: GET
+- **Method**: `GET`
 - **URL**: `http://localhost:8000/api/v1/users/history`
 
 ### Response:
@@ -464,9 +464,8 @@ src/
 
 ### Upload Video
 
--**Method:** `POST`
-
--**URL:** `http://localhost:8000/api/v1/videos/upload-video`
+- **Method:** `POST`
+- **URL:** `http://localhost:8000/api/v1/videos/upload-video`
 
 **Request Body (Form Data):**
 
@@ -499,9 +498,8 @@ src/
 
 ## Get Video with Id
 
--**Method:** `GET`
-
--**URL:** `http://localhost:8000/api/v1/videos/:videoId`
+- **Method:** `GET`
+- **URL:** `http://localhost:8000/api/v1/videos/:videoId`
 
 **Response Body:**
 
@@ -567,7 +565,6 @@ src/
 ### Request
 
 - **Method**: `POST`
-
 - **URL**: `http://localhost:8000/api/v1/comments/:videoId`
 
 - **Body**:
@@ -602,7 +599,6 @@ src/
 **Request:**
 
 - **Method:** `GET`
-
 - **URL:** `localhost:8000/api/v1/comments/c/:commentId`
 
 **Response:**
@@ -687,7 +683,6 @@ src/
 **Request:**
 
 - **Method:** `PATCH`
-
 - **URL:** `localhost:8000/api/v1/comments/c/:commentId`
 
 - **Body:**
@@ -724,7 +719,6 @@ src/
 ### Request
 
 - **Method**: `POST`
-
 - **URL**: `localhost:8000/api/v1/subscription/c/:channelId`
 
 ### Response
@@ -743,7 +737,6 @@ src/
 ### Request
 
 - **Method**: `GET`
-
 - **URL**: `localhost:8000/api/v1/subscription/c/:channelId`
 
 ### Response
@@ -773,7 +766,6 @@ src/
 ### Request
 
 - **Method**: `GET`
-
 - **URL**: `localhost:8000/api/v1/subscription/u/:subscriberId`
 
 ### Response
@@ -874,7 +866,6 @@ src/
 ## Request
 
 - **Method:** `POST`
-
 - **URL:** `http://localhost:8000/api/v1/likes/toggle/c/:commentId`
 
 #### Response
@@ -897,7 +888,6 @@ src/
 #### Request
 
 - **Method:** `POST`
-
 - **URL:** `http://localhost:8000/api/v1/likes/toggle/t/:tweetId`
 
 #### Response
@@ -919,9 +909,8 @@ src/
 
 ## Request: Get Liked Videos
 
--**Method**: `GET`  
-
--**URL**: `localhost:8000/api/v1/likes/videos`
+- **Method**: `GET`  
+- **URL**: `localhost:8000/api/v1/likes/videos`
 
 ## Response
 
@@ -956,9 +945,8 @@ src/
 
 ## Request:
 
--**Method**: `POST` 
-
--**URL**: `http://localhost:8000/api/v1/tweets/`
+- **Method**: `POST` 
+- **URL**: `http://localhost:8000/api/v1/tweets/`
 
 **Body**:
 
@@ -995,7 +983,6 @@ src/
 ### Request
 
 - **Method**: `GET`
-
 - **URL**: `localhost:8000/api/v1/tweets/user/:userId`
 
 ### Response
@@ -1082,9 +1069,8 @@ src/
 
 **Request:**
 
--**Method:** `PATCH` 
-
--**URL**: `localhost:8000/api/v1/tweets/:tweetId`
+- **Method:** `PATCH` 
+- **URL**: `localhost:8000/api/v1/tweets/:tweetId`
 
 **Request Body:**
 
@@ -1115,9 +1101,8 @@ src/
 ## Delete Tweet
 
 ## Request: 
--**Method:** `DELETE`
-
--**URL**: `localhost:8000/api/v1/tweets/:tweetId`
+- **Method:** `DELETE`
+- **URL**: `localhost:8000/api/v1/tweets/:tweetId`
 
 **Response:**
 
@@ -1141,9 +1126,8 @@ src/
 
 ## Request:
 
--**Method:** `POST` 
-
--**URL**: `localhost:8000/api/v1/playlist/`
+- **Method:** `POST` 
+- **URL**: `localhost:8000/api/v1/playlist/`
 
 **Request Body:**
 
@@ -1180,9 +1164,8 @@ src/
 
 **Request:**
 
--**Method:** `PATCH` 
-
--**URL**: `localhost:8000/api/v1/playlist/add/:videoId/:playlistId`
+- **Method:** `PATCH` 
+- **URL**: `localhost:8000/api/v1/playlist/add/:videoId/:playlistId`
 
 **Response:**
 
@@ -1210,9 +1193,8 @@ src/
 
 **Request:**
 
--**Method:** `GET` 
-
--**URL:** `localhost:8000/api/v1/playlist/:playlistId`
+- **Method:** `GET` 
+- **URL:** `localhost:8000/api/v1/playlist/:playlistId`
 
 **Response:**
 
@@ -1244,9 +1226,8 @@ src/
 
 ## Request:
 
--**Method:** `PATCH` 
-
--**URL:** `localhost:8000/api/v1/playlist/:playlistId`
+- **Method:** `PATCH` 
+- **URL:** `localhost:8000/api/v1/playlist/:playlistId`
 
 **Request Body:**
 
@@ -1283,9 +1264,8 @@ src/
 
 ## Request:
 
--**Method:** `PATCH` 
-
--**Url:** `localhost:8000/api/v1/playlist/remove/:videoId/:playlistId`
+- **Method:** `PATCH` 
+- **Url:** `localhost:8000/api/v1/playlist/remove/:videoId/:playlistId`
 
 **Response:**
 
@@ -1314,7 +1294,6 @@ src/
 #### Request
 
 - **Method**: `GET`
-
 - **URL**: `localhost:8000/api/v1/playlist/user/:userId`
 
 #### Response
@@ -1421,7 +1400,6 @@ src/
 **Request**
 
 - **Method**: `DELETE`
-
 - **URL**: `localhost:8000/api/v1/playlist/:playlistId`
 
 
@@ -1455,7 +1433,6 @@ src/
 ### channel statistics
 
 - **Method**: `GET`
-
 - **URL**: `localhost:8000/api/v1/dashboard/stats/:channelId`
 
 
@@ -1494,7 +1471,6 @@ src/
 ## channel videos
 
 - **Method**: `GET`
-
 - **URL**: `localhost:8000/api/v1/dashboard/videos/:channelId`
 
 
