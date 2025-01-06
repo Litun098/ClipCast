@@ -123,16 +123,20 @@ src/
 
 #### **Log In a User**
 
-**POST** `localhost:8000/api/v1/users/login`
-  - **Request Body (JSON):**
-    ```json
+-**Method:** `POST`  
+
+-**URL:** `localhost:8000/api/v1/users/login`
+  
+  
+- **Request Body (JSON):**
+```json
     {
       "email": "string",
       "password": "string"
     }
-    ```
-  - **Response:**
-    ```json
+```
+- **Response:**
+```json
     {
       "success": true,
       "message": "Login successful",
@@ -146,7 +150,7 @@ src/
       "accessToken": "string",
       "refreshToken": "string"
     }
-    ```
+```
 
 #### **Log Out a User**
 
@@ -161,6 +165,239 @@ src/
       "success": true,
       "message": "Logged out successfully"
     }
+```
+
+###  refresh-token
+
+- **Method**: `POST`
+- **URL**: `localhost:8000/api/v1/users/refresh-token`
+
+
+#### Response:
+- **Status**: OK
+- **Code**: 200
+
+#### Response Body:
+```json
+{
+    "statusCode": 200,
+    "data": {
+        "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzYyZjVhNzg4NWMzNjY4Zjc3OGFhMDQiLCJlbWFpbCI6Im5heWFrbGl0dW45QGdtYWlsLmNvbSIsInVzZXJuYW1lIjoibGl0dW4wOTgiLCJmdWxsTmFtZSI6IkxpdHVuIE5heWFrIiwiaWF0IjoxNzM2MDk0MDY4LCJleHAiOjE3MzYyNjY4Njh9.hqwFG3OQSV5yJVEdRkrcZUe3_XqE1Nj5ZNU35RctBZ4"
+    },
+    "message": "Access token refreshed",
+    "success": true
+}
+```
+
+## Change Password
+
+### Request
+- **Method**: POST
+- **URL**: `localhost:8000/api/v1/users/change-password`
+- **Body** (raw JSON):
+```json
+  {
+      "oldPassword": "password123",
+      "newPassword": "password12345"
+  }
+```
+
+
+#### Response:
+- **Status**: OK
+- **Code**: 200
+
+
+#### Response Body:
+```json
+{
+    "statusCode": 200,
+    "data": {},
+    "message": "Password changed successfully.",
+    "success": true
+}
+```
+
+
+## Get Current User
+
+### Request
+- **Method**: GET
+- **URL**: `localhost:8000/api/v1/users/current-user`
+
+
+#### Response:
+- **Status**: OK
+- **Code**: 200
+
+
+#### Response Body:
+```json
+{
+    "statusCode": 200,
+    "data": {
+        "_id": "677a94a435f3f6f35d2d8027",
+        "username": "letha.weimann82",
+        "email": "nora_macgyver@hotmail.com",
+        "fullName": "pants_chief.dfac",
+        "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1736086683/qf8i55x0voc2e1pogy1t.jpg",
+        "coverImage": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1736086686/yemfmenhjdrvwl3qf6p2.jpg",
+        "watchHistory": [],
+        "createdAt": "2025-01-05T14:18:12.360Z",
+        "updatedAt": "2025-01-05T14:21:57.742Z",
+        "__v": 0
+    },
+    "message": "current user fetched successfully.",
+    "success": true
+}
+```
+
+## Update Account Details
+
+### Request:
+- **Method**: PATCH
+- **URL**: `http://localhost:8000/api/v1/users/update-account`
+- **Body**:
+```json
+  {
+    "email": "litun12345@gmail.com"
+  }
+```
+
+### Response:
+- **Status**: 200 OK
+- **Body**:
+```json
+  {
+    "statusCode": 200,
+    "data": {
+      "_id": "677a94a435f3f6f35d2d8027",
+      "username": "letha.weimann82",
+      "email": "litun12345@gmail.com",
+      "fullName": "pants_chief.dfac",
+      "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1736086683/qf8i55x0voc2e1pogy1t.jpg",
+      "coverImage": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1736086686/yemfmenhjdrvwl3qf6p2.jpg",
+      "watchHistory": [],
+      "createdAt": "2025-01-05T14:18:12.360Z",
+      "updatedAt": "2025-01-05T14:22:18.692Z",
+      "__v": 0,
+      "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzdhOTRhNDM1ZjNmNmYzNWQyZDgwMjciLCJpYXQiOjE3MzYwODY4MTcsImV4cCI6MTczNzgxNDgxN30.HvO05-UP7zeqEuKpdTLaNXh0_IsfqNdUBlNXTTQJNks"
+    },
+    "message": "Account details updated successfully",
+    "success": true
+  }
+```
+
+## Update Avatar
+
+### Request:
+- **Method**: PATCH
+- **URL**: `http://localhost:8000/api/v1/users/avatar`
+- **Body** (Form data):
+
+### Response:
+- **Status**: 200 OK
+- **Body**:
+```json
+  {
+    "statusCode": 200,
+    "data": {
+      "_id": "677a94a435f3f6f35d2d8027",
+      "username": "letha.weimann82",
+      "email": "litun12345@gmail.com",
+      "fullName": "pants_chief.dfac",
+      "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1736086968/nag2dqgfciyymzt41svl.jpg",
+      "coverImage": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1736086686/yemfmenhjdrvwl3qf6p2.jpg",
+      "watchHistory": [],
+      "createdAt": "2025-01-05T14:18:12.360Z",
+      "updatedAt": "2025-01-05T14:22:53.750Z",
+      "__v": 0,
+      "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzdhOTRhNDM1ZjNmNmYzNWQyZDgwMjciLCJpYXQiOjE3MzYwODY4MTcsImV4cCI6MTczNzgxNDgxN30.HvO05-UP7zeqEuKpdTLaNXh0_IsfqNdUBlNXTTQJNks"
+    },
+    "message": "avatar updated successfully",
+    "success": true
+  }
+```
+
+
+
+## Update Cover Image
+
+### Request:
+- **Method**: PATCH
+- **URL**: `http://localhost:8000/api/v1/users/cover-image`
+- **Body** (Form data):
+
+### Response:
+- **Status**: 200 OK
+- **Body**:
+```json
+  {
+    "statusCode": 200,
+    "data": {
+      "_id": "677a94a435f3f6f35d2d8027",
+      "username": "letha.weimann82",
+      "email": "litun12345@gmail.com",
+      "fullName": "pants_chief.dfac",
+      "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1736086968/nag2dqgfciyymzt41svl.jpg",
+      "coverImage": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1736086991/yrkgdwfjhulj9kogun3y.jpg",
+      "watchHistory": [],
+      "createdAt": "2025-01-05T14:18:12.360Z",
+      "updatedAt": "2025-01-05T14:23:17.004Z",
+      "__v": 0,
+      "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzdhOTRhNDM1ZjNmNmYzNWQyZDgwMjciLCJpYXQiOjE3MzYwODY4MTcsImV4cCI6MTczNzgxNDgxN30.HvO05-UP7zeqEuKpdTLaNXh0_IsfqNdUBlNXTTQJNks"
+    },
+    "message": "Cover image updated successfully",
+    "success": true
+  }
+```
+
+
+
+## User Channel Profile
+
+### Request:
+- **Method**: GET
+- **URL**: `http://localhost:8000/api/v1/users/c/:username`
+
+### Response:
+- **Status**: 200 OK
+- **Body**:
+```json
+  {
+    "statusCode": 200,
+    "data": {
+      "_id": "6762f5a7885c3668f778aa04",
+      "username": "litun098",
+      "email": "nayaklitun9@gmail.com",
+      "fullName": "Litun Nayak",
+      "avatar": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1734538659/efjbolkn8cjgvqabulal.jpg",
+      "coverImage": "http://res.cloudinary.com/dbcc9vr2u/image/upload/v1734538661/akdmp1daknshduch7yto.jpg",
+      "subscribersCount": 1,
+      "channelsSubscribedToCount": 3,
+      "isSubscribed": false
+    },
+    "message": "User channel fetched",
+    "success": true
+  }
+```
+
+## Watch History
+
+### Request:
+- **Method**: GET
+- **URL**: `http://localhost:8000/api/v1/users/history`
+
+### Response:
+- **Status**: 200 OK
+- **Body**:
+```json
+  {
+    "statusCode": 200,
+    "data": [],
+    "message": "Watch History fetched successfully",
+    "success": true
+  }
 ```
 
 ## Video API Endpoints
@@ -264,7 +501,7 @@ src/
 
 -**Method:** `GET`
 
--**URL:** `http://localhost:8000/api/v1/videos/677a1eccaaba8f58c614a18b`
+-**URL:** `http://localhost:8000/api/v1/videos/:videoId`
 
 **Response Body:**
 
@@ -291,12 +528,12 @@ src/
 ## Delete Video
 
 - **Method**: `DELETE`
-- **URL**: `localhost:8000/api/v1/videos/6762fb45614d4e2a6988cfd1`
+- **URL**: `localhost:8000/api/v1/videos/:videoId`
 
 ### Toggle Publish Status
 
 - **Method**: `PATCH`
-- **URL**: `localhost:8000/api/v1/videos/video-status/6762fa888435da7925c0f4a8`
+- **URL**: `localhost:8000/api/v1/videos/video-status/:videoId`
 
 #### Response:
 
@@ -330,7 +567,9 @@ src/
 ### Request
 
 - **Method**: `POST`
-- **URL**: `http://localhost:8000/api/v1/comments/6762fa888435da7925c0f4a8`
+
+- **URL**: `http://localhost:8000/api/v1/comments/:videoId`
+
 - **Body**:
   ```json
   {
@@ -358,14 +597,13 @@ src/
   }
   ```
 
-## Comments
-
 ### Get Video Comments
 
 **Request:**
 
 - **Method:** `GET`
-- **URL:** `localhost:8000/api/v1/comments/6762fa888435da7925c0f4a8`
+
+- **URL:** `localhost:8000/api/v1/comments/c/:commentId`
 
 **Response:**
 
@@ -431,7 +669,7 @@ src/
 **Request:**
 
 - **Method:** `DELETE`
-- **URL:** `localhost:8000/api/v1/comments/c/677a9a329503a1566148cfca`
+- **URL:** `localhost:8000/api/v1/comments/c/:commentId`
 
 **Response:**
 
@@ -449,7 +687,9 @@ src/
 **Request:**
 
 - **Method:** `PATCH`
-- **URL:** `localhost:8000/api/v1/comments/c/6770100581f936ea3b1ce221`
+
+- **URL:** `localhost:8000/api/v1/comments/c/:commentId`
+
 - **Body:**
 
 ```json
@@ -484,7 +724,8 @@ src/
 ### Request
 
 - **Method**: `POST`
-- **URL**: `localhost:8000/api/v1/subscription/c/6650db452a493b1ea757dace`
+
+- **URL**: `localhost:8000/api/v1/subscription/c/:channelId`
 
 ### Response
 
@@ -501,8 +742,9 @@ src/
 
 ### Request
 
-- **Method**: GET
-- **URL**: `localhost:8000/api/v1/subscription/c/6762f5a7885c3668f778aa04`
+- **Method**: `GET`
+
+- **URL**: `localhost:8000/api/v1/subscription/c/:channelId`
 
 ### Response
 
@@ -530,8 +772,9 @@ src/
 
 ### Request
 
-- **Method**: GET
-- **URL**: `localhost:8000/api/v1/subscription/u/6762f5a7885c3668f778aa04`
+- **Method**: `GET`
+
+- **URL**: `localhost:8000/api/v1/subscription/u/:subscriberId`
 
 ### Response
 
@@ -602,7 +845,7 @@ src/
 #### Request
 
 - **Method:** `POST`
-- **URL:** `http://localhost:8000/api/v1/likes/toggle/v/67681eb62dcadc59233256b2`
+- **URL:** `http://localhost:8000/api/v1/likes/toggle/v/:videoId`
 
 #### Response
 
@@ -631,7 +874,8 @@ src/
 ## Request
 
 - **Method:** `POST`
-- **URL:** `http://localhost:8000/api/v1/likes/toggle/c/6770100581f936ea3b1ce221`
+
+- **URL:** `http://localhost:8000/api/v1/likes/toggle/c/:commentId`
 
 #### Response
 
@@ -653,7 +897,8 @@ src/
 #### Request
 
 - **Method:** `POST`
-- **URL:** `http://localhost:8000/api/v1/likes/toggle/t/677949eb90b74bbf77220c9c`
+
+- **URL:** `http://localhost:8000/api/v1/likes/toggle/t/:tweetId`
 
 #### Response
 
@@ -675,6 +920,7 @@ src/
 ## Request: Get Liked Videos
 
 -**Method**: `GET`  
+
 -**URL**: `localhost:8000/api/v1/likes/videos`
 
 ## Response
@@ -750,7 +996,7 @@ src/
 
 - **Method**: `GET`
 
-- **URL**: `localhost:8000/api/v1/tweets/user/6762f5a7885c3668f778aa04`
+- **URL**: `localhost:8000/api/v1/tweets/user/:userId`
 
 ### Response
 
@@ -838,7 +1084,7 @@ src/
 
 -**Method:** `PATCH` 
 
--**URL**: `localhost:8000/api/v1/tweets/677a18d74d85d8be06ead817`
+-**URL**: `localhost:8000/api/v1/tweets/:tweetId`
 
 **Request Body:**
 
@@ -871,7 +1117,7 @@ src/
 ## Request: 
 -**Method:** `DELETE`
 
--**URL**: `localhost:8000/api/v1/tweets/677949e790b74bbf77220c96`
+-**URL**: `localhost:8000/api/v1/tweets/:tweetId`
 
 **Response:**
 
@@ -936,7 +1182,7 @@ src/
 
 -**Method:** `PATCH` 
 
--**URL**: `localhost:8000/api/v1/playlist/add/677a1eccaaba8f58c614a18b/677aadb4965a3c57419244d6`
+-**URL**: `localhost:8000/api/v1/playlist/add/:videoId/:playlistId`
 
 **Response:**
 
@@ -966,7 +1212,7 @@ src/
 
 -**Method:** `GET` 
 
--**Url:** `localhost:8000/api/v1/playlist/677aadb4965a3c57419244d6`
+-**URL:** `localhost:8000/api/v1/playlist/:playlistId`
 
 **Response:**
 
@@ -1000,7 +1246,7 @@ src/
 
 -**Method:** `PATCH` 
 
--**Url:** `localhost:8000/api/v1/playlist/677aadb4965a3c57419244d6`
+-**URL:** `localhost:8000/api/v1/playlist/:playlistId`
 
 **Request Body:**
 
@@ -1039,7 +1285,7 @@ src/
 
 -**Method:** `PATCH` 
 
--**Url:** `localhost:8000/api/v1/playlist/remove/677a1eccaaba8f58c614a18b/677aadb4965a3c57419244d6`
+-**Url:** `localhost:8000/api/v1/playlist/remove/:videoId/:playlistId`
 
 **Response:**
 
@@ -1069,7 +1315,7 @@ src/
 
 - **Method**: `GET`
 
-- **URL**: `localhost:8000/api/v1/playlist/user/6762f5a7885c3668f778aa04`
+- **URL**: `localhost:8000/api/v1/playlist/user/:userId`
 
 #### Response
 
@@ -1176,18 +1422,13 @@ src/
 
 - **Method**: `DELETE`
 
-- **URL**: `localhost:8000/api/v1/playlist/677a1ca4aaba8f58c614a140`
+- **URL**: `localhost:8000/api/v1/playlist/:playlistId`
 
----
 
 **Response:**
 
-- **Method**: `DELETE`
-
-- **URL**: `localhost:8000/api/v1/playlist/677a1ca4aaba8f58c614a140`
 - **Code**: 200
 
----
 
 ### Response Body:
 
@@ -1211,13 +1452,12 @@ src/
 
 ## Dashboard
 
-### channel stats
+### channel statistics
 
 - **Method**: `GET`
 
-- **URL**: `localhost:8000/api/v1/dashboard/stats/6762f5a7885c3668f778aa04`
+- **URL**: `localhost:8000/api/v1/dashboard/stats/:channelId`
 
----
 
 #### Response:
 
@@ -1237,11 +1477,9 @@ src/
         "6762fa888435da7925c0f4a8",
         "67681eb62dcadc59233256b2"
       ],
-      "password": "$2b$10$Clvdsk.IQLEOYjsyoQZyue91W9pjHiUmQGoZ9KMM/WbzrCNAqKb9K",
       "createdAt": "2024-12-18T16:17:43.227Z",
       "updatedAt": "2025-01-05T14:39:10.076Z",
       "__v": 10,
-      "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzYyZjVhNzg4NWMzNjY4Zjc3OGFhMDQiLCJpYXQiOjE3MzYwODcwNzIsImV4cCI6MTczNzgxNTA3Mn0.9B0lrpNVkPLXa9UO3ClyGU9LmfQfX-rKsgZ-STPTCVc"
     },
     "totalVideos": 0,
     "totalViews": 0,
@@ -1253,22 +1491,18 @@ src/
 }
 ```
 
----
-
 ## channel videos
 
 - **Method**: `GET`
 
-- **URL**: `localhost:8000/api/v1/dashboard/videos/6762f5a7885c3668f778aa04`
+- **URL**: `localhost:8000/api/v1/dashboard/videos/:channelId`
 
----
 
 #### Response:
 
 - **Status**: OK
 - **Code**: 200
 
----
 
 #### Response Body:
 

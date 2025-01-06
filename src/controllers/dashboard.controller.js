@@ -15,9 +15,7 @@ const getChannelStats = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Invalid channel ID.");
   }
 
-  console.log(channelId);
-
-  const userDetails = await User.findById(channelId);
+  const userDetails = await User.findById(channelId).select("-password -refreshToken")
   
   // Fetch total videos and total views for the channel
   const videosStats = await Video.aggregate([
