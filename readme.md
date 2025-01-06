@@ -1,8 +1,8 @@
 #### Video Application
 
-# YouTube Backend
+# Clip-cast Backend
 
-This project is a backend system for a YouTube-like application. It is built using Node.js and Express.js and includes various features like authentication, video upload, comments, and more. The application uses MongoDB as the database and integrates with third-party services like Cloudinary for media storage.
+This project is a backend system for a Clip-cast-like application. It is built using Node.js and Express.js and includes various features like authentication, video upload, comments, and more. The application uses MongoDB as the database and integrates with third-party services like Cloudinary for media storage.
 
 ## Features
 
