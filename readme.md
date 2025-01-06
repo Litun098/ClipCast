@@ -94,8 +94,8 @@ src/
 -**Method:** `POST` 
 
 -**URL**: `localhost:8000/api/v1/users/register`
-  ## Request Body (form-data):
-    ```json
+## Request Body (form-data):
+```json
     {
       "username": "string",
       "email": "string",
@@ -103,9 +103,9 @@ src/
       "avatar": "file (optional)",
       "coverImage": "file (optional)"
     }
-    ```
-  ## Response:
-    ```json
+```
+## Response:
+```json
     {
       "success": true,
       "message": "User registered successfully",
@@ -119,7 +119,7 @@ src/
       "accessToken": "string",
       "refreshToken": "string"
     }
-    ```
+```
 
 #### **Log In a User**
 
