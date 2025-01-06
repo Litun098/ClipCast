@@ -91,9 +91,9 @@ src/
 
 #### Register a New User
 
--**Method:** `POST` 
+- **Method:** `POST` 
 
--**URL**: `localhost:8000/api/v1/users/register`
+- **URL**: `localhost:8000/api/v1/users/register`
 ## Request Body (form-data):
 ```json
     {
@@ -123,9 +123,9 @@ src/
 
 #### **Log In a User**
 
--**Method:** `POST`  
+- **Method:** `POST`  
 
--**URL:** `localhost:8000/api/v1/users/login`
+- **URL:** `localhost:8000/api/v1/users/login`
   
   
 - **Request Body (JSON):**
@@ -154,9 +154,9 @@ src/
 
 #### **Log Out a User**
 
--**Method:** `POST`
+- **Method:** `POST`
 
--**URL:** `localhost:8000/api/v1/users/logout`
+- **URL:** `localhost:8000/api/v1/users/logout`
 
 **Response:**
 
