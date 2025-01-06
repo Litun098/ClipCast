@@ -25,8 +25,6 @@ const toggleSubscription = asyncHandler(async (req, res) => {
     "username avatar _id"
   );
 
-  console.log(channel);
-
   if (!channel) {
     throw new ApiError(404, "Channel not found");
   }

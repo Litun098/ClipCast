@@ -193,24 +193,33 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
       req.cookies.refreshToken || req.body.refreshToken;
 
     if (!incomingRefreshToken) {
-      throw new ApiError(401, "Unauthirized access");
+      throw new ApiError(401, "Unauthorized access");
     }
 
-    const decodedToken = jwt.verify(
-      incomingRefreshToken,
-      process.env.ACCESS_TOKEN_SECRET
-    );
+    // Verify the refresh token
+    let decodedToken;
+    try {
+      decodedToken = jwt.verify(
+        incomingRefreshToken,
+        process.env.REFRESH_TOKEN_SECRET
+      );
+    } catch (err) {
+      console.error("JWT Verification Error:", err.message);
+      throw new ApiError(401, "Invalid or expired refresh token.");
+    }
 
+    // Find user by ID in token payload
     const user = await User.findById(decodedToken?._id);
-
     if (!user) {
       throw new ApiError(401, "Invalid refresh token");
     }
 
-    if (incomingRefreshToken !== user?.refreshToken) {
+    // Ensure the refresh token matches the one in the database
+    if (incomingRefreshToken !== user.refreshToken) {
       throw new ApiError(401, "Refresh token is expired or used");
     }
 
+    // Generate new tokens
     const options = {
       httpOnly: true,
       secure: true,
@@ -218,6 +227,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 
     const { accessToken, newRefreshToken } =
       await generateAccessAndRefreshToken(user._id);
+
     return res
       .status(200)
       .cookie("accessToken", accessToken, options)
@@ -230,7 +240,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
         )
       );
   } catch (error) {
-    console.log(error);
+    console.error("Error refreshing access token:", error);
     throw new ApiError(401, error?.message || "Invalid refresh token");
   }
 });
