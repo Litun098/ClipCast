@@ -2,6 +2,8 @@ import jwt from "jsonwebtoken";
 
 import mongoose from "mongoose";
 
+import bcrypt from "bcrypt";
+
 import { User } from "../models/user.model.js";
 import { ApiError } from "../utils/apiErrors.js";
 import { ApiResponse } from "../utils/apiResponse.js";
@@ -115,22 +117,31 @@ const login = asyncHandler(async (req, res) => {
   // generate access token and refresh token
   // send cookie
 
-  const { username, email, password } = req.body;
+  const { identifier, password } = req.body;
 
-  if (!email || !password) {
-    throw new ApiError(400, "Username or password is required.");
+  if (!identifier || !password) {
+    return res.status(400).json({
+      message: "Email/username and password are required.",
+    });
   }
 
+  // Look for user using email or username
   const user = await User.findOne({
-    $or: [{ email }, { username }],
+    $or: [{ email: identifier }, { username: identifier }],
   });
 
   if (!user) {
-    throw new ApiError(400, "User does not exits");
+    return res.status(400).json({
+      message: "User doesn't exists",
+    });
   }
-  const isValid = user.isPasswordCorrect(password);
+
+  const isValid = bcrypt.compareSync(password, user.password);
+
   if (!isValid) {
-    throw new ApiError(400, "Invalid user credentials");
+    return res.status(400).json({
+      message: "Invalid username or password",
+    });
   }
 
   const { accessToken, refreshToken } = await generateAccessAndRefreshToken(
@@ -205,18 +216,24 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
       );
     } catch (err) {
       console.error("JWT Verification Error:", err.message);
-      throw new ApiError(401, "Invalid or expired refresh token.");
+      return res.status(400).json({
+        message: "Invalid or expired refresh token",
+      });
     }
 
     // Find user by ID in token payload
     const user = await User.findById(decodedToken?._id);
     if (!user) {
-      throw new ApiError(401, "Invalid refresh token");
+      return res.status(400).json({
+        message: "Invalid refresh token",
+      });
     }
 
     // Ensure the refresh token matches the one in the database
     if (incomingRefreshToken !== user.refreshToken) {
-      throw new ApiError(401, "Refresh token is expired or used");
+      return res.status(400).json({
+        message: "Refresh token is expired or used",
+      });
     }
 
     // Generate new tokens
@@ -241,7 +258,9 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
       );
   } catch (error) {
     console.error("Error refreshing access token:", error);
-    throw new ApiError(401, error?.message || "Invalid refresh token");
+    return res.status(400).json({
+      message: "Invalid refresh token",
+    });
   }
 });
 
@@ -253,7 +272,9 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
   const isPasswordCorrect = await user.isPasswordCorrect(oldPassword);
 
   if (!isPasswordCorrect) {
-    throw new ApiError(400, "Invalid old password");
+    return res.status(400).json({
+      message: "Invalid old password",
+    });
   }
 
   user.password = newPassword;
@@ -277,7 +298,9 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
   console.log(fullName, email);
 
   if (!fullName && !email) {
-    throw new ApiError(400, "All fields are required");
+    return res.status(400).json({
+      message: "All fields are required",
+    });
   }
 
   if (fullName) {
@@ -302,7 +325,9 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
   const existUserAvatar = await User.findById(req.user?.id).select("avatar");
 
   if (!avatarLocalPath) {
-    throw new ApiError(400, "Avatar file is missing");
+    return res.status(400).json({
+      message: "Avatar file is missing",
+    });
   }
 
   // Get public Id of Image
@@ -352,7 +377,9 @@ const updateUserCoverImage = asyncHandler(async (req, res) => {
   const coverImage = await uploadOnCloudinary(coverImageLocalPath);
 
   if (!coverImage.url) {
-    throw new ApiError(400, "Error while uploading on coverImage.");
+    return res.status(400).json({
+      message: "Error while uploading cover image",
+    });
   }
 
   const user = await User.findByIdAndUpdate(
@@ -373,10 +400,12 @@ const updateUserCoverImage = asyncHandler(async (req, res) => {
 });
 
 const getUserChannelProfile = asyncHandler(async (req, res) => {
-  const {username} = req.params;
+  const { username } = req.params;
 
   if (!username?.trim()) {
-    throw new ApiError(400, "Username is missing");
+    return res.status(400).json({
+      message: "username is missing",
+    });
   }
 
   const channel = await User.aggregate([
