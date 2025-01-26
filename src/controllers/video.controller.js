@@ -57,7 +57,9 @@ const publishAVideo = asyncHandler(async (req, res) => {
       field?.trim() === "";
     })
   ) {
-    throw new ApiError(400, "All fields are required");
+    return res.status(400).json({
+      message: "All fields are required.",
+    });
   }
 
   // Title, description,thumbnail, video, isPublished, owner
@@ -81,7 +83,9 @@ const publishAVideo = asyncHandler(async (req, res) => {
   const video = videoUploadResponse?.secure_url;
 
   if (!video) {
-    throw new ApiError(400, "Video is required.");
+    return res.status(400).json({
+      message: "Video is required",
+    });
   }
 
   // console.log(video, thumbnail, title, description, isPublished, req.user._id);
@@ -103,7 +107,9 @@ const publishAVideo = asyncHandler(async (req, res) => {
         new ApiResponse(200, uploadedVideo, "Video uploaded successfully.")
       );
   } catch (error) {
-    throw new ApiError(500, error, "Something went wrong.");
+    return res.status(500).json({
+      message: "Something went wrong",
+    });
   }
 });
 
@@ -127,7 +133,7 @@ const getVideoById = asyncHandler(async (req, res) => {
       );
       if (user) {
         const videoIndex = user.watchHistory.indexOf(videoId);
-      
+
         // If video is not in the history, add it
         if (videoIndex === -1) {
           user.watchHistory.push(videoId);
@@ -144,7 +150,9 @@ const getVideoById = asyncHandler(async (req, res) => {
       .status(200)
       .json(new ApiResponse(200, existVideo, "Video fetched successfully."));
   } catch (error) {
-    throw new ApiError(500, error, "Video does't exist!");
+    return res.status(500).json({
+      message: "Video does't exist!",
+    });
   }
 });
 
@@ -228,7 +236,9 @@ const togglePublishStatus = asyncHandler(async (req, res) => {
         )
       );
   } catch (error) {
-    throw new ApiError(500, "Something went wrong.");
+    return res.status(500).json({
+      message: "Something went wrong.",
+    });
   }
 });
 

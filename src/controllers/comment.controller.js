@@ -69,7 +69,7 @@ const updateComment = asyncHandler(async (req, res) => {
   const comment = await Comment.findById(commentId);
 
   if (!comment) {
-    throw new ApiError(404, "Comment not found.");
+    return res.status(400).json(new ApiResponse(400,"Comment not found."));
   }
 
   // Check ownership
@@ -78,7 +78,7 @@ const updateComment = asyncHandler(async (req, res) => {
     const updatedComment = await comment.save();
 
     if (!updatedComment) {
-      throw new ApiError(500, "Failed to update the comment.");
+      return res.status(500).json(new ApiResponse(500,"Failed to update the comment."));
     }
 
     return res

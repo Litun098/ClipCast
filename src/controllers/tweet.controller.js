@@ -13,7 +13,9 @@ const createTweet = asyncHandler(async (req, res) => {
   const tweet = await Tweet.create({ content, owner: req.user._id });
 
   if (!tweet) {
-    throw new ApiError(500, "Something went wrong.");
+    return res.status(500).json({
+      message: "Something went wrong.",
+    });
   }
 
   return res.status(200).json(new ApiResponse(201, tweet));
@@ -24,7 +26,9 @@ const getUserTweets = asyncHandler(async (req, res) => {
   const { userId } = req.params;
 
   if (!isValidObjectId(userId)) {
-    throw new ApiError(400, "Invalid user id.");
+    return res.status(400).json({
+      message: "Invalid user Id.",
+    });
   }
 
   const tweets = await Tweet.find({ owner: userId }, { createdAt: 1 })
@@ -35,7 +39,9 @@ const getUserTweets = asyncHandler(async (req, res) => {
     .select("_id content createdAt owner");
 
   if (tweets.length == 0) {
-    return res.status(404).json(new ApiResponse(404, "No tweet found."));
+    return res.status(400).json({
+      message: "No tweet found.",
+    });
   }
   return res.status(200).json(new ApiResponse(201, tweets, "Tweets fetched."));
 });
@@ -46,17 +52,21 @@ const updateTweet = asyncHandler(async (req, res) => {
   const { content } = req.body;
 
   if (!isValidObjectId(tweetId)) {
-    throw new ApiError(400, "Invalid tweet id.");
+    return res.status(400).json({
+      message: "Invalid tweet Id.",
+    });
   }
 
   const tweet = await Tweet.findOneAndUpdate(
     { _id: tweetId },
     { $set: { content: content } },
-    {new:true}
+    { new: true }
   );
 
   if (!tweet) {
-    throw new ApiError(500, error, "Something went wrong");
+    return res.status(500).json({
+      message: "Something went wrong.",
+    });
   }
 
   return res
@@ -69,13 +79,17 @@ const deleteTweet = asyncHandler(async (req, res) => {
   const { tweetId } = req.params;
 
   if (!isValidObjectId(tweetId)) {
-    throw new ApiError(400, "Invalid tweet id.");
+    return res.status(400).json({
+      message: "Invalid tweet Id.",
+    });
   }
 
   const tweet = await Tweet.findByIdAndDelete({ _id: tweetId });
 
   if (!tweet) {
-    throw new ApiError(404, "Tweet not found.");
+    return res.status(400).json({
+      message: "Tweet not found.",
+    });
   }
 
   return res

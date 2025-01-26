@@ -12,11 +12,13 @@ const getChannelStats = asyncHandler(async (req, res) => {
   const { channelId } = req.params;
 
   if (!isValidObjectId(channelId)) {
-    throw new ApiError(400, "Invalid channel ID.");
+    return res.status(400).json(new ApiResponse(400, "Invalid channel Id."));
   }
 
-  const userDetails = await User.findById(channelId).select("-password -refreshToken")
-  
+  const userDetails = await User.findById(channelId).select(
+    "-password -refreshToken"
+  );
+
   // Fetch total videos and total views for the channel
   const videosStats = await Video.aggregate([
     { $match: { owner: channelId } },
@@ -62,7 +64,7 @@ const getChannelVideos = asyncHandler(async (req, res) => {
   const { channelId } = req.params;
 
   if (!isValidObjectId(channelId)) {
-    throw new ApiError(400, "Invalid channel ID.");
+    return res.status(400).json(new ApiResponse(400, "Invalid channel Id."));
   }
 
   // Fetch all videos uploaded by the channel
@@ -71,7 +73,9 @@ const getChannelVideos = asyncHandler(async (req, res) => {
     .select("title description thumbnail views duration createdAt"); // Select specific fields for a concise response
 
   if (!videos.length) {
-    throw new ApiError(404, "No videos found for this channel.");
+    return res
+      .status(400)
+      .json(new ApiResponse(400, "No video found for this channel."));
   }
 
   return res

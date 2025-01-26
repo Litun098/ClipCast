@@ -29,7 +29,7 @@ const toggleVideoLike = asyncHandler(async (req, res) => {
   });
 
   if (!likedVideo) {
-    throw new ApiError(500, "Something went wrong.");
+    return res.status(500).json(new ApiResponse(500, "Something went wrong."));
   }
 
   return res.status(201).json(new ApiResponse(201, "Liked video"));
@@ -59,7 +59,7 @@ const toggleCommentLike = asyncHandler(async (req, res) => {
   });
 
   if (!likedComment) {
-    throw new ApiError(500, "Something went wrong.");
+    return res.status(500).json(new ApiResponse(500, "Something went wrong."));
   }
 
   return res.status(201).json(new ApiResponse(201, "Liked comment"));
@@ -89,7 +89,7 @@ const toggleTweetLike = asyncHandler(async (req, res) => {
   });
 
   if (!likedTweet) {
-    throw new ApiError(500, "Something went wrong.");
+    return res.status(500).json(new ApiResponse(500, "Something went wrong."));
   }
 
   return res.status(201).json(new ApiResponse(201, "Liked tweet"));
@@ -124,7 +124,7 @@ const getLikedVideos = asyncHandler(async (req, res) => {
     return res.status(201).json(new ApiResponse(201, videoDetails));
   } catch (error) {
     console.error("Error fetching liked videos:", error);
-    throw new ApiError(500, "Internal Server error");
+    return res.status(500).json(new ApiResponse(500,"Internal server error."));
   }
 });
 

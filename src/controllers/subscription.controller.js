@@ -63,7 +63,7 @@ const getUserChannelSubscribers = asyncHandler(async (req, res) => {
 
   console.log(channels);
   if(!channels){    
-    return res.status(400).json(new ApiRespons(400,"No subscriptions yet."));
+    return res.status(400).json(new ApiResponse(400,"No subscriptions yet."));
   }
 
   return res.status(200).json(new ApiResponse(200,channels));

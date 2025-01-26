@@ -16,7 +16,7 @@ const createPlaylist = asyncHandler(async (req, res) => {
   });
 
   if (!playlist) {
-    throw new ApiError(400, "Failed to create playlist");
+    return res.status(400).json(new ApiResponse(500,"Failed to create playlist."));
   }
   res
     .status(201)
@@ -30,7 +30,7 @@ const getUserPlaylists = asyncHandler(async (req, res) => {
   const playLists = await Playlist.find({ owner: userId });
 
   if (!playLists) {
-    throw new ApiError(404, "No playlists found");
+    return res.status(400).json(new ApiResponse(400,"No playlist found."));
   }
 
   res
@@ -45,7 +45,7 @@ const getPlaylistById = asyncHandler(async (req, res) => {
   // get playlist by id
 
   if (!isValidObjectId(playlistId)) {
-    throw new ApiError(400, "Invalid playlist id");
+    return res.status(400).json(new ApiResponse(400,"Invalid playlist id."));
   }
 
   const playlist = await Playlist.findById({ _id:playlistId }).populate({
@@ -54,7 +54,7 @@ const getPlaylistById = asyncHandler(async (req, res) => {
   });
 
   if (!playlist) {
-    throw new ApiError(404, "Playlist not found");
+    return res.status(400).json(new ApiResponse(400,"Playlist not found."));
   }
 
   res
@@ -68,7 +68,7 @@ const addVideoToPlaylist = asyncHandler(async (req, res) => {
   const playlist = await Playlist.findById(playlistId);
 
   if (!playlist) {
-    throw new ApiError(404, "Playlist not found");
+    return res.status(400).json(new ApiResponse(400,"Playlist not found."));
   }
 
   playlist.videos.push(videoId);
@@ -89,7 +89,7 @@ const removeVideoFromPlaylist = asyncHandler(async (req, res) => {
   const playlist = await Playlist.findById(playlistId);
 
   if (!playlist) {
-    throw new ApiError(404, "Playlist not found");
+    return res.status(400).json(new ApiResponse(400,"Playlist not found."));
   }
 
   const videoIndex = playlist.videos.indexOf(videoId);
@@ -119,7 +119,7 @@ const deletePlaylist = asyncHandler(async (req, res) => {
   const playlist = await Playlist.findByIdAndDelete(playlistId);
 
   if (!playlist) {
-    throw new ApiError(404, "Playlist not found");
+    return res.status(400).json(new ApiResponse(400,"Playlist not found."));
   }
 
   res
@@ -134,7 +134,7 @@ const updatePlaylist = asyncHandler(async (req, res) => {
 
   const playlist = await Playlist.findById(playlistId);
   if (!playlist) {
-    throw new ApiError(404, "Playlist not found");
+    return res.status(400).json(new ApiResponse(400,"Playlist not found."));
   }
 
   if (name) {
